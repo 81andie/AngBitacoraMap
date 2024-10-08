@@ -1,0 +1,16 @@
+.header {
+
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background-image: linear-gradient(rgba(11, 11, 11, 0.817), rgba(246, 191, 246, 0));
+
+}
+
+.logo{
+  width: 12vw;
+  height: auto;
+}
+
+
+
