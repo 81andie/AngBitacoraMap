@@ -1,5 +1,5 @@
-<div class="container parrafo bg-dark bg-gradient text-light" *ngIf="isSidebarVisible">
-  <div class="d-flex">
+<div class="container parrafo bg-dark bg-gradient text-light p-2" [ngClass]="{'sidebar-visible': isSidebarVisible}">
+  <div class="d-flex mb-3">
     <div class="offcanvas-header w-100">
       <img src="./assets/bitágora.png" alt="Logo" class="bg-image logo">
     </div>
@@ -10,7 +10,7 @@
 
   </div>
 
-  <div class="offcanvas-body text-light">
+  <div class="offcanvas-body text-light mt-2 p-2">
 
     <p>Especifica la informació que vulguis guardar a cada marker</p>
 

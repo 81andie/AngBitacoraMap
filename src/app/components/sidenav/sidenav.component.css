@@ -1,12 +1,59 @@
 .parrafo{
   position: absolute;
-  top: 18px;
-  width: 22rem;
-  height: 95vh;
+  top: 10px;
+  left: -440px;
+  width: 30vw;
+  height: 100vh;
   z-index: 500;
+  transition: left 0.7s ease;
 }
 
 .logo{
-  width: 12vw;
+  width: 14vw;
   height: auto;
 }
+
+.sidebar-visible{
+  left:0;
+}
+
+@media (min-width:320px) {
+.parrafo{
+  width: 100%;
+  top: 0;
+}
+
+.logo{
+  width: 25vw;
+}
+}
+@media (min-width:481px) {
+  .parrafo{
+    width: 100%;
+    top: 0;
+  }
+
+  .logo{
+    width: 26vw;
+  }
+}
+@media(min-width: 641px) {
+  .parrafo{
+   width: 50%;
+   top: 0;
+  }
+
+  .logo{
+    width: 15vw;
+  }
+}
+@media(min-width: 1025px) {
+  .parrafo{
+    width: 38%;
+  }
+
+  .logo{
+    width: 13vw;
+  }
+}
+
