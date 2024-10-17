@@ -1,8 +1,10 @@
 .parrafo{
   position: absolute;
   top: 10px;
-  left: -440px;
-  width: 30vw;
+  left: -480px;
+  overflow-x: hidden;
+
+  width: 32vw;
   height: 100vh;
   z-index: 500;
   transition: left 0.7s ease;

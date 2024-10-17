@@ -9,15 +9,28 @@ import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import { Marcadores } from '../../interfaces/ListaMarcadores';
+import { MarkersService } from '../../services/markers.service';
+
+
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
+
+
 export class MapComponent implements OnInit {
 
+  constructor( private MarkersService: MarkersService){}
+
   private markers: number[][] = [];
+
+
+  /*
+  {coordinate: number[], description: string}[]
+  */
 
   private vectorSource: any = new VectorSource({
     features: []
@@ -44,6 +57,8 @@ export class MapComponent implements OnInit {
 
     map.on('singleclick', (evt) => {
       this.addMarker(evt.coordinate)
+      this.actualizarMarcadores()
+
       this.saveToLocalStorage()
     });
 
@@ -51,13 +66,22 @@ export class MapComponent implements OnInit {
 
     this.recoverMarkers()
 
+
+
+
   }
 
 
 
   private addMarker = (coordinate: number[]) => {
 
-    this.markers.push(coordinate)
+    this.markers.push(coordinate);
+    this.MarkersService.inicializar(coordinate)
+    this.MarkersService.obtenerMarkers();
+
+
+
+
 
     const startMarker = new Feature({
       type: 'point',
@@ -93,5 +117,15 @@ export class MapComponent implements OnInit {
   })
 
   }
+
+  actualizarMarcadores(): void{
+
+
+
+
+
+  }
+
+
 
 }
