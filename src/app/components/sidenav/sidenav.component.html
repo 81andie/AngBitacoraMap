@@ -16,21 +16,31 @@
 
       <div class="list-item-group justify-content-evenly ms-2 h-25 ms-2"
         *ngFor="let marker of markers; index as i">
+        <span class="bg-light ms-1 p-2 rounded-pill mt-4">{{marker.description}}</span>
         <hr class="text-light">
+        <div class="container">
         <span class="list-item text-light bg-secondary ms-1 p-2 rounded-pill">Marcador{{i + 1}}  </span>
         <span class="list-item text-light bg-warning ms-2 p-1 rounded-pill">{{marker.coordinate}}</span>
+
+      </div>
+
+
 
 
         <div class="list-item-group d-flex justify-content-evenly ms-2 form-floating text-dark mt-4">
 
-          <textarea class="form-control text-dark h-25 mb-4" placeholder="Escriu..." id="floatingTextarea">
+          <textarea class="form-control text-dark h-25 mb-4"
+          placeholder="Escriu..."
+          id="floatingTextarea{{i}}"
+          [(ngModel)]="marker.description"
+          >
 
           </textarea>
 
-          <label for="floatingTextarea">Vull anar a...</label>
+          <label for="floatingTextarea{{i}}">Vull anar a...</label>
 
 
-          <button class=" btn btn-success ms-2 h-25">Guardar </button>
+
           <button class="btn btn-danger ms-2 h-25">Eliminar </button>
         </div>
 
@@ -45,7 +55,7 @@
     <button type="button" class="btn btn-secondary w-25"><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"
         style="color: #fcfcfd;"></i> Sortir</button>
     <button type="button" class="btn btn-info w-25"><i class="fa-regular fa-floppy-disk"
-        style="color: #d3e6f5;"></i> Actualitzar</button>
+        style="color: #d3e6f5;" (click)="guardarLocal()"></i> Actualitzar</button>
   </div>
 
 </div>
