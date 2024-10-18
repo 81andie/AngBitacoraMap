@@ -23,6 +23,7 @@ public markers:Marcadores[]=[];
 
 constructor( private MarkersService: MarkersService){
  this.sacarMarcadores()
+
  this.recogerComentario()
 
 }
