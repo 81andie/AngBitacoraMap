@@ -27,9 +27,18 @@ constructor( private MarkersService: MarkersService){
 
 
 sacarMarcadores(){
- 
 
-  console.log(this.MarkersService.obtenerMarkers());
+
+ this.markers = this.MarkersService.obtenerMarkers()
+
+ if(this.markers.length > 0){
+  this.isSidebarVisible = false;
+ }else{
+  this.isSidebarVisible = true;
+ }
+
+
+
 }
 
 
