@@ -25,7 +25,9 @@ export class MapComponent implements OnInit {
 
   constructor( private MarkersService: MarkersService){}
 
-  private markers: number[][] = [];
+ // private markers: number[][] = [];
+
+  private Markers:Marcadores[]=[];
 
 
   /*
@@ -57,9 +59,9 @@ export class MapComponent implements OnInit {
 
     map.on('singleclick', (evt) => {
       this.addMarker(evt.coordinate)
-      this.actualizarMarcadores()
+     this.saveToLocalStorage();
 
-      this.saveToLocalStorage()
+
     });
 
     map.addLayer(this.vectorLayer);
@@ -69,15 +71,19 @@ export class MapComponent implements OnInit {
 
 
 
+
+
   }
 
 
 
-  private addMarker = (coordinate: number[]) => {
+  private addMarker = (coordinate: number[]):void => {
 
-    this.markers.push(coordinate);
-    this.MarkersService.inicializar(coordinate)
-    this.MarkersService.obtenerMarkers();
+  this.MarkersService.inicializar(coordinate)
+   //this.markers.push(coordinate);
+
+
+   // this.MarkersService.obtenerMarkers()
 
 
 
@@ -97,35 +103,30 @@ export class MapComponent implements OnInit {
     }))
 
     this.vectorSource.addFeature(startMarker);
-
-    console.log('Marcadores:', this.markers);
+    //console.log('Marcadores:', this.markers);
   }
 
 
-  saveToLocalStorage(): void {
+saveToLocalStorage(): void {
 
-  let marcadores= this.markers;
+
+  const marcadores= this.MarkersService.obtenerMarkers();
   localStorage.setItem('markers',JSON.stringify( marcadores));
+
+
+ //let marcadores = this.MarkersService.obtenerMarkers()
+
   }
 
   recoverMarkers ():void{
 
-  const markersRecuperados = JSON.parse(localStorage.getItem('markers') || "[]");
+  const markersRecuperados= JSON.parse(localStorage.getItem('markers') || "[]");
 
-  markersRecuperados.forEach((coord:number[])=>{
-      this.addMarker(coord);
+  markersRecuperados.forEach((marker:Marcadores)=>{
+    // this.MarkersService.inicializar(marker.coordinate)
+      this.addMarker(marker.coordinate);
   })
 
   }
-
-  actualizarMarcadores(): void{
-
-
-
-
-
-  }
-
-
 
 }

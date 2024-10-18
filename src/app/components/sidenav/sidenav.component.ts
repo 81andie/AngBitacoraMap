@@ -5,33 +5,35 @@ import { MarkersService } from '../../services/markers.service';
 
 
 
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
-export class SidenavComponent{
+export class SidenavComponent {
 
-  public isSidebarVisible: boolean = true;
+public isSidebarVisible: boolean = true;
 
+//public recogerMarcadores: number[][] = [];
 
-  constructor( private MarkersService: MarkersService){}
-
- public recogerMarcadores: number[][] = [];
-
+public markers:Marcadores[]=[];
 
 
-  sacarMarcadores(){
-
- this.recogerMarcadores = this.MarkersService.obtenerMarkers();
-
- console.log(this.recogerMarcadores);
-
-  }
+constructor( private MarkersService: MarkersService){
+ this.sacarMarcadores()
+}
 
 
 
+sacarMarcadores(){
+ 
 
+  console.log(this.MarkersService.obtenerMarkers());
+}
 
 
 }
+
+
+
