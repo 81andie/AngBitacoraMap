@@ -25,6 +25,7 @@ constructor( private MarkersService: MarkersService){
  this.sacarMarcadores()
  this.recogerComentario()
 
+
 }
 
 
@@ -37,6 +38,8 @@ sacarMarcadores(){
  //console.log(this.markers)
 
 
+
+
 }
 
 guardarLocal(){
@@ -47,6 +50,7 @@ let marcadorCompoleto = localStorage.setItem('markers', JSON.stringify(this.mark
 }
 
 
+
 recogerComentario(){
 
   this.markers = JSON.parse(localStorage.getItem('markers') || "[]");
@@ -54,6 +58,11 @@ recogerComentario(){
 
   console.log(this.markers);
 
+}
+
+eliminarMarcador(index:number){
+this.markers.splice(index, 1);
+this.guardarLocal();
 }
 
 
