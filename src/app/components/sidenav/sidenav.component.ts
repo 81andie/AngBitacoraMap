@@ -5,7 +5,6 @@ import { MarkersService } from '../../services/markers.service';
 
 
 
-
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -13,7 +12,7 @@ import { MarkersService } from '../../services/markers.service';
 })
 export class SidenavComponent {
 
-public isSidebarVisible: boolean = true;
+public isSidebarVisible: boolean = false;
 
 //public recogerMarcadores: number[][] = [];
 
@@ -21,9 +20,9 @@ public markers:Marcadores[]=[];
 //public textAreaValue: string="";
 
 
+
 constructor( private MarkersService: MarkersService){
  this.sacarMarcadores()
-
  this.recogerComentario()
 
 }
@@ -33,6 +32,7 @@ constructor( private MarkersService: MarkersService){
 sacarMarcadores(){
 
  this.markers = this.MarkersService.obtenerMarkers()
+ this.isSidebarVisible= true;
 
  //console.log(this.markers)
 
@@ -49,11 +49,10 @@ let marcadorCompoleto = localStorage.setItem('markers', JSON.stringify(this.mark
 
 recogerComentario(){
 
-  const markersRecuperados= JSON.parse(localStorage.getItem('markers') || "[]");
-
-  this.markers = markersRecuperados;
+  this.markers = JSON.parse(localStorage.getItem('markers') || "[]");
 
 
+  console.log(this.markers);
 
 }
 
