@@ -36,6 +36,7 @@
           id="floatingTextarea{{i}}"
           [(ngModel)]="marker.description"
 
+
           >
 
           </textarea>
@@ -57,8 +58,8 @@
 
     <button type="button" class="btn btn-secondary w-25"><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"
         style="color: #fcfcfd;"></i> Sortir</button>
-    <button type="button" class="btn btn-info w-25"><i class="fa-regular fa-floppy-disk"
-        style="color: #d3e6f5;" (click)="guardarLocal()"></i> Actualitzar</button>
+    <button type="button" class="btn btn-info w-25"(click)="guardarLocal()" ><i class="fa-regular fa-floppy-disk"
+        style="color: #d3e6f5;"  ></i> Actualitzar</button>
   </div>
 
 </div>

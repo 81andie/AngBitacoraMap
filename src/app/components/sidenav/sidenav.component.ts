@@ -10,9 +10,9 @@ import { MarkersService } from '../../services/markers.service';
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
-export class SidenavComponent {
+export class SidenavComponent implements OnInit {
 
-public isSidebarVisible: boolean = false;
+public isSidebarVisible: boolean = true;
 
 //public recogerMarcadores: number[][] = [];
 
@@ -22,30 +22,31 @@ public markers:Marcadores[]=[];
 
 
 constructor( private MarkersService: MarkersService){
- this.sacarMarcadores()
- this.recogerComentario()
+
 
 
 }
+  ngOnInit(): void {
+    this.sacarMarcadores()
+
+
+  }
 
 
 
 sacarMarcadores(){
-
  this.markers = this.MarkersService.obtenerMarkers()
- this.isSidebarVisible= true;
 
  //console.log(this.markers)
-
-
-
 
 }
 
 guardarLocal(){
 
-let marcadorCompoleto = localStorage.setItem('markers', JSON.stringify(this.markers));
- console.log(marcadorCompoleto)
+let marcadorCompleto = localStorage.setItem('markers', JSON.stringify(this.markers));
+
+ console.log(this.markers)
+this.isSidebarVisible = true;
 
 }
 
@@ -53,16 +54,16 @@ let marcadorCompoleto = localStorage.setItem('markers', JSON.stringify(this.mark
 
 recogerComentario(){
 
-  this.markers = JSON.parse(localStorage.getItem('markers') || "[]");
-
-
-  console.log(this.markers);
+let comentario = JSON.parse(localStorage.getItem('markers') || "[]");
+ console.log(comentario);
 
 }
+
 
 eliminarMarcador(index:number){
 this.markers.splice(index, 1);
 this.guardarLocal();
+
 }
 
 
