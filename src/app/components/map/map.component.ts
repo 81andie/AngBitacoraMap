@@ -9,7 +9,7 @@ import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { Marcadores } from '../../interfaces/ListaMarcadores';
+import { Marcador } from '../../interfaces/ListaMarcadores';
 import { MarkersService } from '../../services/markers.service';
 
 
@@ -23,12 +23,7 @@ import { MarkersService } from '../../services/markers.service';
 
 export class MapComponent implements OnInit {
 
-  constructor( private MarkersService: MarkersService){}
-
- // private markers: number[][] = [];
-
-  private Markers:Marcadores[]=[];
-
+  constructor(private MarkersService: MarkersService) { }
 
   /*
   {coordinate: number[], description: string}[]
@@ -59,7 +54,7 @@ export class MapComponent implements OnInit {
 
     map.on('singleclick', (evt) => {
       this.addMarker(evt.coordinate)
-     this.saveToLocalStorage();
+     
 
 
     });
@@ -69,24 +64,17 @@ export class MapComponent implements OnInit {
     this.recoverMarkers()
 
 
-
-
-
-
   }
 
 
 
-  private addMarker = (coordinate: number[]):void => {
+  private addMarker = (coordinate: number[] | undefined): void => {
 
-  this.MarkersService.inicializar(coordinate)
-   //this.markers.push(coordinate);
+    if (!coordinate) return;
 
-
-   // this.MarkersService.obtenerMarkers()
-
-
-
+    this.MarkersService.inicializar(coordinate)
+    //this.markers.push(coordinate);
+    // this.MarkersService.obtenerMarkers()
 
 
     const startMarker = new Feature({
@@ -107,25 +95,15 @@ export class MapComponent implements OnInit {
   }
 
 
-saveToLocalStorage(): void {
 
+  recoverMarkers(): void {
 
-  const marcadores= this.MarkersService.obtenerMarkers();
-  localStorage.setItem('markers',JSON.stringify( marcadores));
+    const markersRecuperados = this.MarkersService.obtenerMarkers();
 
-
- //let marcadores = this.MarkersService.obtenerMarkers()
-
-  }
-
-  recoverMarkers ():void{
-
-  const markersRecuperados= JSON.parse(localStorage.getItem('markers') || "[]");
-
-  markersRecuperados.forEach((marker:Marcadores)=>{
-    // this.MarkersService.inicializar(marker.coordinate)
+    markersRecuperados.forEach((marker: Marcador) => {
+      // this.MarkersService.inicializar(marker.coordinate)
       this.addMarker(marker.coordinate);
-  })
+    })
 
   }
 

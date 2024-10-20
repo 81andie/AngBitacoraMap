@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Marcadores } from '../interfaces/ListaMarcadores';
+import { Marcador } from '../interfaces/ListaMarcadores';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -7,51 +8,49 @@ import { Marcadores } from '../interfaces/ListaMarcadores';
 })
 export class MarkersService {
 
+  public marcadorBorrador: Marcador= {};
+
+  private marcadorBorradorSubject = new Subject<Marcador>();
+
+  constructor() { }
 
 
- // private markers: number[][]= [];
-
-  private markers:Marcadores[]=[];
-
-
-
-
-  /*
-  Objetivo:
-    dispensador de marcadores.
-    comunicar los marcadores con los componentes que lo quieran.
-  */
-  constructor() {}
-
- /*inicializar(markers:number[]):void{
-
-   this.markers = markers;
-   this.markers.push(markers)
-
-  }*/
-
-  /*obtenerMarkers(): number[][] {
-    //console.log(this.markers)
-   return this.markers;
-
-  }*/
-
- inicializar (coordinate:number[]):void{
-  const newMarker: Marcadores ={
-    coordinate: coordinate,
-    description: ''
-  };
-  this.markers.push(newMarker);
- }
+  inicializar(coordinate: number[]): void {
+    const newMarker: Marcador = {
+      coordinate: coordinate,
+      description: ''
+    };
+    this.marcadorBorradorSubject.next(newMarker);
+  }
 
 
- obtenerMarkers(): Marcadores[]{
+  obtenerMarkers(): Marcador[] {
 
-  return this.markers
+    return JSON.parse(localStorage.getItem('markers') || "[]");
+
+  }
+
+  guardarMarkers(markers:Marcador[]):void{
+
+    localStorage.setItem('markers', JSON.stringify(markers));
+
+  }
+
+  obtenerSubscripcionMarcador(){
+    return this.marcadorBorradorSubject.asObservable();
+  }
 
 
+  guardarMarcador(marker:Marcador){
 
- }
+    let marcadores = this.obtenerMarkers();
+
+    marcadores.push(marker);
+
+    this.guardarMarkers(marcadores);
+
+  }
+
 
 
 

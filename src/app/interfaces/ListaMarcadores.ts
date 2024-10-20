@@ -1,6 +1,6 @@
 
-export interface Marcadores {
-  coordinate: number[],
-  description: string
+export interface Marcador {
+  coordinate?: number[],
+  description?: string
 
 }

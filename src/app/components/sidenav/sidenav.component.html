@@ -14,15 +14,14 @@
 
     <div class="form-floating text-dark" >
 
-      <div class="list-item-group justify-content-evenly ms-2 h-25 p-1"
-        *ngFor="let marker of markers; index as i">
-        <span class="list-item text-light bg-secondary  p-1 rounded-pill">Marcador{{i + 1}}  </span>
+      <div class="list-item-group justify-content-evenly ms-2 h-25 p-1">
+        <span class="list-item text-light bg-secondary  p-1 rounded-pill">Marcador </span>
 
-        <span class="bg-primary rounded-pill mt-4 ms-1 p-1">{{marker.description}}</span>
+        <span class="bg-primary rounded-pill mt-4 ms-1 p-1">{{sidenavMarcador.description}}</span>
         <hr class="text-light">
         <div class="container">
 
-        <span class="list-item text-dark bg-warning p-1 rounded-pill">{{marker.coordinate}}</span>
+        <span class="list-item text-dark bg-warning p-1 rounded-pill">{{sidenavMarcador.coordinate}}</span>
 
       </div>
 
@@ -33,19 +32,19 @@
 
           <textarea class="form-control text-dark h-25 mb-4"
           placeholder="Escriu..."
-          id="floatingTextarea{{i}}"
-          [(ngModel)]="marker.description"
+          id="floatingTextarea"
+          [(ngModel)]="sidenavMarcador.description"
 
 
           >
 
           </textarea>
 
-          <label for="floatingTextarea{{i}}">Vull anar a...</label>
+          <label for="floatingTextarea">Vull anar a...</label>
 
 
 
-          <button class="btn btn-danger ms-2 h-25" (click)="eliminarMarcador(i)">Eliminar </button>
+         <!-- <button class="btn btn-danger ms-2 h-25" (click)="eliminarMarcador(i)">Eliminar </button>-->
         </div>
 
       </div>
