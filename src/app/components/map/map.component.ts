@@ -53,8 +53,9 @@ export class MapComponent implements OnInit {
     });
 
     map.on('singleclick', (evt) => {
-      this.addMarker(evt.coordinate)
-     
+      this.addMarker(evt.coordinate);
+      this.MarkersService.inicializar(evt.coordinate)
+
 
 
     });
@@ -72,7 +73,7 @@ export class MapComponent implements OnInit {
 
     if (!coordinate) return;
 
-    this.MarkersService.inicializar(coordinate)
+
     //this.markers.push(coordinate);
     // this.MarkersService.obtenerMarkers()
 
