@@ -1,27 +1,21 @@
-# AngBitacoraMap
+tarea 1
+Crear el nuevo componente que sera un panel, con 2 botones (guardar, editar) + input
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
+tarea 2
+Pasar las funcionalidades del sidenav hacia el componente panel
 
-## Development server
+tarea 3
+modificar el sidenav (coorde fuera, los elementos titulo, etc más juntos)
+scroll
+buscador de marcadores(buscar la descripción)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Tarea 4 
+que cada marcador al hacer click me se me centre en el marcador
 
-## Code scaffolding
+tarea 5
+poder mover los marcadores
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+tarea 6 
+Poder dibujar lineas
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

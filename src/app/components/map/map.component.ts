@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Modify, Snap} from 'ol/interaction.js';
 import Map from 'ol/Map.js';
 import OSM from 'ol/source/OSM.js';
 import TileLayer from 'ol/layer/Tile.js';
@@ -37,9 +38,18 @@ export class MapComponent implements OnInit {
     source: this.vectorSource
   });
 
+  private map: Map | null = null;
+  /*
+
+   private map: Map | null = null;
+   private map2: Map | null = map
+
+  private variable_name : type_variable
+  */
+
 
   ngOnInit(): void {
-    const map = new Map({
+    this.map = new Map({
       layers: [
         new TileLayer({
           source: new OSM(),
@@ -52,7 +62,7 @@ export class MapComponent implements OnInit {
       }),
     });
 
-    map.on('singleclick', (evt) => {
+      this.map.on('singleclick', (evt) => {
       this.addMarker(evt.coordinate);
       this.MarkersService.inicializar(evt.coordinate)
 
@@ -60,7 +70,9 @@ export class MapComponent implements OnInit {
 
     });
 
-    map.addLayer(this.vectorLayer);
+    this.addInteractions();
+
+    this.map.addLayer(this.vectorLayer);
 
     this.recoverMarkers()
 
@@ -96,6 +108,13 @@ export class MapComponent implements OnInit {
   }
 
 
+  addInteractions(){
+    if(!this.map) return
+    const modify = new Modify({source: this.vectorSource});
+    this.map.addInteraction(modify);
+  }
+
+
 
   recoverMarkers(): void {
 
@@ -107,5 +126,7 @@ export class MapComponent implements OnInit {
     })
 
   }
+
+
 
 }
