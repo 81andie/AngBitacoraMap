@@ -12,7 +12,7 @@ buscador de marcadores(buscar la descripción)
 Tarea 4 
 que cada marcador al hacer click me se me centre en el marcador
 
-tarea 5
+tarea 5 - 
 poder mover los marcadores
 
 tarea 6 

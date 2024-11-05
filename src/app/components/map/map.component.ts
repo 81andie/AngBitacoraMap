@@ -62,12 +62,9 @@ export class MapComponent implements OnInit {
       }),
     });
 
-      this.map.on('singleclick', (evt) => {
+    this.map.on('singleclick', (evt) => {
       this.addMarker(evt.coordinate);
       this.MarkersService.inicializar(evt.coordinate)
-
-
-
     });
 
     this.addInteractions();
@@ -92,7 +89,7 @@ export class MapComponent implements OnInit {
 
     const startMarker = new Feature({
       type: 'point',
-      geometry: new Point(coordinate),
+      geometry: new Point(coordinate)
     });
 
     startMarker.setStyle(new Style({
@@ -111,6 +108,13 @@ export class MapComponent implements OnInit {
   addInteractions(){
     if(!this.map) return
     const modify = new Modify({source: this.vectorSource});
+
+    modify.on('modifyend', (evt) => {
+      console.log(evt);
+
+    });
+
+
     this.map.addInteraction(modify);
   }
 
