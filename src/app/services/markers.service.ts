@@ -44,9 +44,7 @@ export class MarkersService {
   guardarMarcador(marker:Marcador){
 
     let marcadores = this.obtenerMarkers();
-
     marcadores.push(marker);
-
     this.guardarMarkers(marcadores);
 
   }

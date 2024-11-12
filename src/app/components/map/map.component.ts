@@ -92,6 +92,7 @@ export class MapComponent implements OnInit {
       geometry: new Point(coordinate)
     });
 
+
     startMarker.setStyle(new Style({
       image: new Icon({
         anchor: [0.6, 0.5],
@@ -105,13 +106,32 @@ export class MapComponent implements OnInit {
   }
 
 
+
+
   addInteractions(){
+
     if(!this.map) return
     const modify = new Modify({source: this.vectorSource});
 
     modify.on('modifyend', (evt) => {
+      let marcadoresPorGuardar:Marcador[] = []
+      let markers = [];
       console.log(evt);
+      console.log(this.vectorSource.getFeatures());
 
+      this.vectorSource.getFeatures().forEach((feature: Feature<Point>)=>{
+       let coordinate = feature.getGeometry()?.getCoordinates()
+       marcadoresPorGuardar.push({coordinate: coordinate, description: ''})
+      })
+
+      /*
+      obtener las coordenadas de los markers
+      this.vectorSource.getFeatures() esto es una array
+        en cada elemento del array
+        feature.getGeometry().getCoordinates() - esto devuelve un array de longitud latitud, coordinates
+      */
+
+      this.MarkersService.guardarMarkers(marcadoresPorGuardar)
     });
 
 
