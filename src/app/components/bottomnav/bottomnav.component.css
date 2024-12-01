@@ -1,0 +1,33 @@
+.container-nav {
+  position: absolute;
+  width: 300px;
+  padding: 5px 10px;
+  height: 100px;
+  left: 50%;
+  margin-left: -150px;
+  bottom: 20px;
+  z-index: 10;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow : 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.button{
+  font-size: 20px;
+  border: none;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+
+.button-save {
+
+  color: white;
+  background-color: #3fc672;
+
+}
+
+.button-close{
+  color: white;
+  background-color: rgb(231, 69, 69);
+
+}

@@ -134,7 +134,6 @@ export class MapComponent implements OnInit {
       this.MarkersService.guardarMarkers(marcadoresPorGuardar)
     });
 
-
     this.map.addInteraction(modify);
   }
 

@@ -7,13 +7,15 @@ import { MapComponent } from './components/map/map.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { FormsModule } from '@angular/forms';
+import { BottomnavComponent } from './components/bottomnav/bottomnav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     HeaderComponent,
-    SidenavComponent
+    SidenavComponent,
+    BottomnavComponent
   ],
   imports: [
     BrowserModule,
