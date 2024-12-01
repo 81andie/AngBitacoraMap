@@ -14,14 +14,14 @@
 
     <div class="form-floating text-dark" >
 
-      <div class="list-item-group justify-content-evenly ms-2 h-25 p-1">
-        <span class="list-item text-light bg-secondary  p-1 rounded-pill">Marcador </span>
+      <div class="list-item-group justify-content-evenly ms-2 h-25 p-1" *ngFor="let marker of marker">
+        <span class="list-item text-light bg-secondary  p-1 rounded-pill">{{marker.description}} </span>
 
-        <span class="bg-primary rounded-pill mt-4 ms-1 p-1">{{sidenavMarcador.description}}</span>
+        <span class="bg-primary rounded-pill mt-4 ms-1 p-1"></span>
         <hr class="text-light">
         <div class="container">
 
-        <span class="list-item text-dark bg-warning p-1 rounded-pill">{{sidenavMarcador.coordinate}}</span>
+        <span class="list-item text-dark bg-warning p-1 rounded-pill">{{marker.coordinate}}</span>
 
       </div>
 

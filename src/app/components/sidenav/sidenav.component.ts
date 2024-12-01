@@ -6,6 +6,7 @@ import { MarkersService } from '../../services/markers.service';
 
 
 
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -20,6 +21,7 @@ export class SidenavComponent implements OnInit {
 
 
   public sidenavMarcador: Marcador = {};
+  public marker: Marcador[]=[];
 
 
 
@@ -27,8 +29,11 @@ export class SidenavComponent implements OnInit {
 
 
   }
-  
+
   ngOnInit(): void {
+    console.log(this.sidenavMarcador)
+    this.recogerComentario()
+    this.getMarkers();
 
   }
 
@@ -45,11 +50,17 @@ export class SidenavComponent implements OnInit {
 
   recogerComentario() {
 
-
+    this.isSidebarVisible = true;
     const marcadorCompleto = this.MarkersService.obtenerMarkers()
-    console.log(marcadorCompleto)
+
   }
 
+
+  getMarkers(){
+   this.marker= this.MarkersService.obtenerMarkers();
+   console.log(this.marker);
+
+  }
 
   /*eliminarMarcador(index:number){
   this.markers.splice(index, 1);
