@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Modify, Snap} from 'ol/interaction.js';
 import Map from 'ol/Map.js';
 import OSM from 'ol/source/OSM.js';
@@ -22,14 +22,16 @@ import { MarkersService } from '../../services/markers.service';
 })
 
 
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnChanges {
 
   constructor(private MarkersService: MarkersService) { }
 
-  /*
-  {coordinate: number[], description: string}[]
-  */
 
+  ngOnChanges(changes: SimpleChanges): void {
+   console.log(changes)
+  }
+
+@Input() public temporaryMarkerToRemove: Marcador = {};
   private vectorSource: any = new VectorSource({
     features: []
   });

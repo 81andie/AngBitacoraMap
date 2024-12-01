@@ -13,26 +13,21 @@ import { MarkersService } from '../../services/markers.service';
 })
 export class SidenavComponent implements OnInit {
 
-public isSidebarVisible: boolean = false;
+  public isSidebarVisible: boolean = false;
 
-//public recogerMarcador: number[][] = [];
-
-
-
-public sidenavMarcador: Marcador = {};
+  //public recogerMarcador: number[][] = [];
 
 
 
-constructor( private MarkersService: MarkersService){
-  this.MarkersService.obtenerSubscripcionMarcador().subscribe((marcador: Marcador )=> {
-    console.log("ha cambiado el marcador", marcador);
-
-    this.sidenavMarcador = marcador;
-    this.isSidebarVisible = true;
-  })
+  public sidenavMarcador: Marcador = {};
 
 
-}
+
+  constructor(private MarkersService: MarkersService) {
+
+
+  }
+  
   ngOnInit(): void {
 
   }
@@ -41,32 +36,26 @@ constructor( private MarkersService: MarkersService){
 
 
 
-guardarLocal(){
-
-// this.MarkersService.guardarMarkers(this.markers);
-
- //console.log(this.markers)
-this.isSidebarVisible = false;
-
-this.MarkersService.guardarMarcador(this.sidenavMarcador)
-
-}
+  guardarLocal() {
+    this.isSidebarVisible = false;
+    this.MarkersService.guardarMarcador(this.sidenavMarcador)
+  }
 
 
 
-recogerComentario(){
+  recogerComentario() {
 
 
-const marcadorCompleto = this.MarkersService.obtenerMarkers()
-console.log(marcadorCompleto)
-}
+    const marcadorCompleto = this.MarkersService.obtenerMarkers()
+    console.log(marcadorCompleto)
+  }
 
 
-/*eliminarMarcador(index:number){
-this.markers.splice(index, 1);
-this.guardarLocal();
+  /*eliminarMarcador(index:number){
+  this.markers.splice(index, 1);
+  this.guardarLocal();
 
-}*/
+  }*/
 
 
 }

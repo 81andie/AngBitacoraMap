@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Marcador } from './interfaces/ListaMarcadores';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AngBitacoraMap';
+
+  public temporaryMarkerToRemove:Marcador = {};
+
+  closeHandler(marcador: Marcador){
+
+    this.temporaryMarkerToRemove = marcador;
+
+
+  }
 }
+
+

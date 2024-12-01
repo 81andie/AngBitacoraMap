@@ -3,11 +3,11 @@
 <app-header></app-header>
 
 
-<app-map></app-map>
+<app-map [temporaryMarkerToRemove]="temporaryMarkerToRemove"></app-map>
 
 <router-outlet>
   <app-sidenav></app-sidenav>
-  <app-bottomnav></app-bottomnav>
+  <app-bottomnav (closeEventEmitter)="closeHandler($event)"></app-bottomnav>
 
 
 </router-outlet>
