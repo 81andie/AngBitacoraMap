@@ -1,7 +1,7 @@
 import { Marcador } from './../../interfaces/ListaMarcadores';
 import { Component, OnInit } from '@angular/core';
 import { MarkersService } from '../../services/markers.service';
-
+import { Subscription } from 'rxjs';
 
 
 
@@ -16,12 +16,12 @@ export class SidenavComponent implements OnInit {
 
   public isSidebarVisible: boolean = false;
 
-  //public recogerMarcador: number[][] = [];
+  public marcador: Marcador[] = [];
+  private markersSubscription!:Subscription;
 
 
 
-  public sidenavMarcador: Marcador = {};
-  public marker: Marcador[]=[];
+
 
 
 
@@ -31,34 +31,31 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.sidenavMarcador)
-    this.recogerComentario()
+
+    //this.recogerComentario()
     this.getMarkers();
 
-  }
-
-
-
-
-
-  guardarLocal() {
-    this.isSidebarVisible = false;
-    this.MarkersService.guardarMarcador(this.sidenavMarcador)
-  }
-
-
-
-  recogerComentario() {
-
-    this.isSidebarVisible = true;
-    const marcadorCompleto = this.MarkersService.obtenerMarkers()
 
   }
+
+
+
 
 
   getMarkers(){
-   this.marker= this.MarkersService.obtenerMarkers();
-   console.log(this.marker);
+
+   /*this.marker= this.MarkersService.obtenerMarkers();
+   this.isSidebarVisible = true;
+   console.log(this.marker);*/
+
+   this.marcador = this.MarkersService.obtenerMarkers();
+   this.markersSubscription = this.MarkersService
+      .obtenerSubscripcionMarkers()
+      .subscribe((marcador) => {
+        this.marcador = marcador;
+      });
+
+      this.isSidebarVisible = true
 
   }
 

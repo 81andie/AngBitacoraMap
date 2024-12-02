@@ -1,7 +1,7 @@
-<div class="container parrafo bg-dark bg-gradient text-light p-2" [ngClass]="{'sidebar-visible': isSidebarVisible}">
+<div class="container parrafo bg-white bg-gradient text-light p-2" [ngClass]="{'sidebar-visible': isSidebarVisible}">
   <div class="d-flex mb-3">
     <div class="offcanvas-header w-100">
-      <img src="./assets/bitágora.png" alt="Logo" class="bg-image logo">
+
     </div>
     <button type="button" class="btn btn-danger btn-outline-danger text-light mt-3 p-2 h-25 flex-shrink-1"
       (click)="isSidebarVisible = !isSidebarVisible">X</button>
@@ -9,43 +9,14 @@
   </div>
 
   <div class="offcanvas-body text-light mt-2 p-1">
-
-    <p>Especifica la informació que vulguis guardar a cada marker</p>
+    <p class="text-dark">Aqui tens els llocs guardats</p>
 
     <div class="form-floating text-dark" >
 
-      <div class="list-item-group justify-content-evenly ms-2 h-25 p-1" *ngFor="let marker of marker">
-        <span class="list-item text-light bg-secondary  p-1 rounded-pill">{{marker.description}} </span>
-
-        <span class="bg-primary rounded-pill mt-4 ms-1 p-1"></span>
-        <hr class="text-light">
-        <div class="container">
-
-        <span class="list-item text-dark bg-warning p-1 rounded-pill">{{marker.coordinate}}</span>
-
-      </div>
-
-
-
-
-        <div class="list-item-group d-flex justify-content-evenly ms-2 form-floating text-dark mt-4">
-
-          <textarea class="form-control text-dark h-25 mb-4"
-          placeholder="Escriu..."
-          id="floatingTextarea"
-          [(ngModel)]="sidenavMarcador.description"
-
-
-          >
-
-          </textarea>
-
-          <label for="floatingTextarea">Vull anar a...</label>
-
-
-
-         <!-- <button class="btn btn-danger ms-2 h-25" (click)="eliminarMarcador(i)">Eliminar </button>-->
-        </div>
+      <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let marker of marcador">
+        <span class="list-item text-dark bg-light  p-1 rounded-pill fs-3">{{marker.description}} </span>
+        <hr class="text-dark">
+        <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1">{{marker.coordinate}}</span>
 
       </div>
       <!-- <textarea class="form-control text-dark h-25 " placeholder="Escriu..." id="floatingTextarea"></textarea>
@@ -53,12 +24,6 @@
     </div>
   </div>
 
-  <div class="d-flex mt-5 justify-content-evenly  ">
 
-    <button type="button" class="btn btn-secondary w-25"><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"
-        style="color: #fcfcfd;"></i> Sortir</button>
-    <button type="button" class="btn btn-info w-25" (click)="guardarLocal()" ><i class="fa-regular fa-floppy-disk"
-        style="color: #d3e6f5;"  ></i> Actualitzar</button>
-  </div>
 
 </div>

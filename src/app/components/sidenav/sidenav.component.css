@@ -3,17 +3,18 @@
   top: 10px;
   left: -480px;
   overflow-x: hidden;
-
   width: 32vw;
   height: 100vh;
   z-index: 500;
   transition: left 0.7s ease;
 }
 
-.logo{
-  width: 14vw;
-  height: auto;
+.marcador{
+  background-color: rgb(248, 246, 243);
+
 }
+
+
 
 .sidebar-visible{
   left:0;
@@ -25,9 +26,7 @@
   top: 0;
 }
 
-.logo{
-  width: 25vw;
-}
+
 }
 @media (min-width:481px) {
   .parrafo{
@@ -35,9 +34,7 @@
     top: 0;
   }
 
-  .logo{
-    width: 26vw;
-  }
+
 }
 @media(min-width: 641px) {
   .parrafo{
@@ -45,17 +42,13 @@
    top: 0;
   }
 
-  .logo{
-    width: 15vw;
-  }
+
 }
 @media(min-width: 1025px) {
   .parrafo{
     width: 38%;
   }
 
-  .logo{
-    width: 13vw;
-  }
+
 }
 

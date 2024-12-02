@@ -17,6 +17,7 @@ export class BottomnavComponent {
 
     this.MarkersService.obtenerSubscripcionMarcador().subscribe((marcador:Marcador)=>{
       this.marcador= marcador;
+      console.log(this.marcador)
       this.isBottomNavVisible = true;
     })
   }
