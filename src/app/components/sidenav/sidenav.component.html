@@ -16,7 +16,7 @@
       <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let marker of marcador">
         <span class="list-item text-dark bg-light  p-1 rounded-pill fs-3">{{marker.description}} </span>
         <hr class="text-dark">
-        <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1">{{marker.coordinate}}</span>
+        <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1" (click)="centerMapToCoordinate(marker.coordinate)">{{marker.coordinate}}</span>
 
       </div>
       <!-- <textarea class="form-control text-dark h-25 " placeholder="Escriu..." id="floatingTextarea"></textarea>

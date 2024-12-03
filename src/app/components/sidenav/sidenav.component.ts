@@ -1,5 +1,5 @@
 import { Marcador } from './../../interfaces/ListaMarcadores';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MarkersService } from '../../services/markers.service';
 import { Subscription } from 'rxjs';
 
@@ -14,39 +14,22 @@ import { Subscription } from 'rxjs';
 })
 export class SidenavComponent implements OnInit {
 
+
   public isSidebarVisible: boolean = false;
 
   public marcador: Marcador[] = [];
   private markersSubscription!:Subscription;
+  @Output() public centerMapToCoordinateEmitter= new EventEmitter<number[]>();
 
-
-
-
-
-
-
-  constructor(private MarkersService: MarkersService) {
-
-
-  }
+  constructor(private MarkersService: MarkersService) {}
 
   ngOnInit(): void {
 
-    //this.recogerComentario()
     this.getMarkers();
-
-
   }
 
 
-
-
-
   getMarkers(){
-
-   /*this.marker= this.MarkersService.obtenerMarkers();
-   this.isSidebarVisible = true;
-   console.log(this.marker);*/
 
    this.marcador = this.MarkersService.obtenerMarkers();
    this.markersSubscription = this.MarkersService
@@ -59,11 +42,10 @@ export class SidenavComponent implements OnInit {
 
   }
 
-  /*eliminarMarcador(index:number){
-  this.markers.splice(index, 1);
-  this.guardarLocal();
+  centerMapToCoordinate(coordinate: number[]|undefined) {
+  this.centerMapToCoordinateEmitter.emit(coordinate);
+  }
 
-  }*/
 
 
 }

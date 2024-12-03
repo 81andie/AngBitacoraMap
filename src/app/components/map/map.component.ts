@@ -1,5 +1,5 @@
 import { Component, Input, input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Modify, Snap} from 'ol/interaction.js';
+import { Modify, Snap } from 'ol/interaction.js';
 import Map from 'ol/Map.js';
 import OSM from 'ol/source/OSM.js';
 import TileLayer from 'ol/layer/Tile.js';
@@ -28,13 +28,62 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-   console.log(changes)
+    /*
+    la variable changes puede contener o bien  temporaryMarkerToRemove o bien
+    newCenter
+
+    si viene newCenter, printar por consola "hola"
+
+
+    si viene el otro, printar por consola "adios"
+
+    y otra diferente si viene temporaryMarkerToRemove
+
+    */
+
+    if (changes['newCenter'] && this.map) {
+      console.log(changes['newCenter'])
+      this.map.getView().setCenter(changes['newCenter'].currentValue)
+    } else if (changes['temporaryMarkerToRemove'] && this.map) {
+      console.log(changes['temporaryMarkerToRemove'])
+
+      /**
+       * guardar pixeles de ejecutar map.getPixelFromCoordinate(coordinate del marcador a borrar)
+       * ejecutar la function map.getFeaturesAtPixel(pixelAnterior, {hitTolerance: 50})
+       * la funcion te da una array de features que estan cerca de la coordenada del marcador
+       * por cada feature
+       *  comprovar si la feature es la misma que el marcador
+       *  una vez sabes sin ninguna duda que la feature es el marcador
+       *  vectorSource.removeFeature(feature);
+      */
+
+      let coordinates= changes['temporaryMarkerToRemove'].currentValue;
+      console.log(coordinates)
+
+      let pixel = this.map.getPixelFromCoordinate(coordinates.coordinate)
+
+      let features = this.map.getFeaturesAtPixel(pixel, { hitTolerance: 50 })
+
+      features.forEach((feature)=>{
+  let coordinate = feature.getProperties();
+  console.log(coordinate['geometry'].flatCoordinates);
+
+
+      })
+
+    }
   }
 
-@Input() public temporaryMarkerToRemove: Marcador = {};
+  @Input() public temporaryMarkerToRemove: Marcador = {};
+  @Input() public newCenter: number[] = [];
+
   private vectorSource: any = new VectorSource({
     features: []
   });
+
+
+
+
 
   private vectorLayer = new VectorLayer({
     source: this.vectorSource
@@ -110,20 +159,20 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-  addInteractions(){
+  addInteractions() {
 
-    if(!this.map) return
-    const modify = new Modify({source: this.vectorSource});
+    if (!this.map) return
+    const modify = new Modify({ source: this.vectorSource });
 
     modify.on('modifyend', (evt) => {
-      let marcadoresPorGuardar:Marcador[] = []
+      let marcadoresPorGuardar: Marcador[] = []
       let markers = [];
       console.log(evt);
       console.log(this.vectorSource.getFeatures());
 
-      this.vectorSource.getFeatures().forEach((feature: Feature<Point>)=>{
-       let coordinate = feature.getGeometry()?.getCoordinates()
-       marcadoresPorGuardar.push({coordinate: coordinate, description: ''})
+      this.vectorSource.getFeatures().forEach((feature: Feature<Point>) => {
+        let coordinate = feature.getGeometry()?.getCoordinates()
+        marcadoresPorGuardar.push({ coordinate: coordinate, description: '' })
       })
 
       /*

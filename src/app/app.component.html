@@ -3,10 +3,13 @@
 <app-header></app-header>
 
 
-<app-map [temporaryMarkerToRemove]="temporaryMarkerToRemove"></app-map>
+<app-map [temporaryMarkerToRemove]="temporaryMarkerToRemove"
+         [newCenter] = "newCoordinateCenter"
+
+></app-map>
 
 <router-outlet>
-  <app-sidenav></app-sidenav>
+  <app-sidenav (centerMapToCoordinateEmitter)="changeCenterOfMapHandler($event)"></app-sidenav>
   <app-bottomnav (closeEventEmitter)="closeHandler($event)"></app-bottomnav>
 
 

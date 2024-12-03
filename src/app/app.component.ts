@@ -10,11 +10,14 @@ export class AppComponent {
   title = 'AngBitacoraMap';
 
   public temporaryMarkerToRemove:Marcador = {};
+  public newCoordinateCenter: number[]=[];
 
   closeHandler(marcador: Marcador){
-
     this.temporaryMarkerToRemove = marcador;
+  }
 
+  changeCenterOfMapHandler(coordinate:number[]){
+    this.newCoordinateCenter = coordinate;
 
   }
 }
