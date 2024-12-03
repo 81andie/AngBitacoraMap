@@ -57,16 +57,20 @@ export class MapComponent implements OnInit, OnChanges {
        *  vectorSource.removeFeature(feature);
       */
 
-      let coordinates= changes['temporaryMarkerToRemove'].currentValue;
+      let coordinates = changes['temporaryMarkerToRemove'].currentValue;
       console.log(coordinates)
 
       let pixel = this.map.getPixelFromCoordinate(coordinates.coordinate)
 
       let features = this.map.getFeaturesAtPixel(pixel, { hitTolerance: 50 })
 
-      features.forEach((feature)=>{
-  let coordinate = feature.getProperties();
-  console.log(coordinate['geometry'].flatCoordinates);
+      features.forEach((feature) => {
+      let coordinate = feature.getProperties();
+       console.log(coordinate['geometry'].flatCoordinates);
+
+      if(coordinate['geometry'].flatCoordinates[0] === coordinates.coordinate[0] && coordinate['geometry'].flatCoordinates[1] === coordinates.coordinate[1]){
+        this.vectorSource.removeFeature(feature);
+      }
 
 
       })
