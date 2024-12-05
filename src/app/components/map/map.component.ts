@@ -57,20 +57,20 @@ export class MapComponent implements OnInit, OnChanges {
        *  vectorSource.removeFeature(feature);
       */
 
-      let coordinates = changes['temporaryMarkerToRemove'].currentValue;
-      console.log(coordinates)
+      let marker = changes['temporaryMarkerToRemove'].currentValue;
+      console.log(marker)
 
-      let pixel = this.map.getPixelFromCoordinate(coordinates.coordinate)
+      let pixel = this.map.getPixelFromCoordinate(marker.coordinate)
 
       let features = this.map.getFeaturesAtPixel(pixel, { hitTolerance: 50 })
 
       features.forEach((feature) => {
-      let coordinate = feature.getProperties();
-       console.log(coordinate['geometry'].flatCoordinates);
+        let properties = feature.getProperties();
+        console.log(properties['geometry'].flatCoordinates);
 
-      if(coordinate['geometry'].flatCoordinates[0] === coordinates.coordinate[0] && coordinate['geometry'].flatCoordinates[1] === coordinates.coordinate[1]){
-        this.vectorSource.removeFeature(feature);
-      }
+        if (properties['geometry'].flatCoordinates[0] === marker.coordinate[0] && properties['geometry'].flatCoordinates[1] === marker.coordinate[1]) {
+          this.vectorSource.removeFeature(feature);
+        }
 
 
       })
@@ -175,8 +175,19 @@ export class MapComponent implements OnInit, OnChanges {
       console.log(this.vectorSource.getFeatures());
 
       this.vectorSource.getFeatures().forEach((feature: Feature<Point>) => {
-        let coordinate = feature.getGeometry()?.getCoordinates()
-        marcadoresPorGuardar.push({ coordinate: coordinate, description: '' })
+        let coordinate = feature.getGeometry()?.getCoordinates();
+        let markers = this.MarkersService.obtenerMarkers();
+        console.log(markers);
+
+        markers.forEach((marker) => {
+          let description = marker.description;
+          console.log(description);
+
+          marcadoresPorGuardar.push({ coordinate: coordinate, description: marker.description })
+
+        })
+
+
       })
 
       /*

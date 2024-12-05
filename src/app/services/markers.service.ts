@@ -26,9 +26,7 @@ export class MarkersService {
 
 
   obtenerMarkers(): Marcador[] {
-
     return JSON.parse(localStorage.getItem('markers') || "[]");
-
 
   }
 
