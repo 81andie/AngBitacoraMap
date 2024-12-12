@@ -80,7 +80,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-  @Input() public temporaryMarkerToRemove: Marcador = {id : 0};
+  @Input() public temporaryMarkerToRemove: Marcador = { id: 0 };
   @Input() public newCenter: number[] = [];
 
   private vectorSource: any = new VectorSource({
@@ -147,7 +147,7 @@ export class MapComponent implements OnInit, OnChanges {
     const startMarker = new Feature({
       type: 'point',
       geometry: new Point(coordinate),
-      properties:{id: this.MarkersService.indice}
+      properties: { id: this.MarkersService.indice }
     });
 
 
@@ -179,15 +179,20 @@ export class MapComponent implements OnInit, OnChanges {
 
       this.vectorSource.getFeatures().forEach((feature: Feature<Point>) => {
 
+
         let coordinate = feature.getGeometry()?.getCoordinates();
         let markers = this.MarkersService.obtenerMarkers();
         console.log(markers);
 
         markers.forEach((marker) => {
+
           let description = marker.description;
           console.log(description);
 
-          marcadoresPorGuardar.push({coordinate: coordinate, description: marker.description })
+          marcadoresPorGuardar.push({
+            coordinate: coordinate, description: marker.description, id: marker.id
+
+          })
 
         })
 
