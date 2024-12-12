@@ -8,20 +8,27 @@ import { Subject } from 'rxjs';
 })
 export class MarkersService {
 
-  public marcadorBorrador: Marcador= {};
+  public marcadorBorrador: Marcador= {id : 0};
 
   private marcadorBorradorSubject = new Subject<Marcador>();
   private markersSubject = new Subject<Marcador[]>();
 
   constructor() { }
 
+  public indice:number = 0;
+
+
+
 
   inicializar(coordinate: number[]): void {
+    this.indice += 1;
     const newMarker: Marcador = {
+      id: this.indice,
       coordinate: coordinate,
       description: ''
     };
     this.marcadorBorradorSubject.next(newMarker);
+
   }
 
 
