@@ -185,14 +185,11 @@ export class MapComponent implements OnInit, OnChanges {
 
        markers= this.MarkersService.obtenerMarkers();
 
-       console.log(coordinate)
-
-
 
 
        markers.forEach((marker) => {
        console.log(marker.coordinate);
-
+        console.log(coordinate)
          //console.log(marker.coordinate)
          // let description = marker.description;
           marcadoresPorGuardar.push({
