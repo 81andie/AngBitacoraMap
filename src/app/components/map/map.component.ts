@@ -173,29 +173,36 @@ export class MapComponent implements OnInit, OnChanges {
 
     modify.on('modifyend', (evt) => {
       let marcadoresPorGuardar: Marcador[] = []
-      let markers = [];
+      let markers : Marcador[]=[];
+
       console.log(evt);
       console.log(this.vectorSource.getFeatures());
 
+
       this.vectorSource.getFeatures().forEach((feature: Feature<Point>) => {
 
+       let coordinate = feature.getGeometry()?.getCoordinates();
 
-        let coordinate = feature.getGeometry()?.getCoordinates();
-        let markers = this.MarkersService.obtenerMarkers();
-        console.log(markers);
+       markers= this.MarkersService.obtenerMarkers();
 
-        markers.forEach((marker) => {
+       console.log(coordinate)
 
-          let description = marker.description;
-          console.log(description);
 
+
+
+       markers.forEach((marker) => {
+       console.log(marker.coordinate);
+
+         //console.log(marker.coordinate)
+         // let description = marker.description;
           marcadoresPorGuardar.push({
-            coordinate: coordinate, description: marker.description, id: marker.id
+          coordinate: coordinate, description: marker.description, id: marker.id
 
           })
 
-        })
+          console.log(marcadoresPorGuardar)
 
+       })
 
       })
 
@@ -206,7 +213,9 @@ export class MapComponent implements OnInit, OnChanges {
         feature.getGeometry().getCoordinates() - esto devuelve un array de longitud latitud, coordinates
       */
 
-      this.MarkersService.guardarMarkers(marcadoresPorGuardar)
+     this.MarkersService.guardarMarkers(marcadoresPorGuardar)
+
+
     });
 
     this.map.addInteraction(modify);
