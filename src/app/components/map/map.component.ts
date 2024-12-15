@@ -5,7 +5,7 @@ import OSM from 'ol/source/OSM.js';
 import TileLayer from 'ol/layer/Tile.js';
 import View from 'ol/View.js';
 import { Feature } from 'ol';
-import { Point } from 'ol/geom';
+import { Geometry, Point } from 'ol/geom';
 import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
@@ -120,13 +120,16 @@ export class MapComponent implements OnInit, OnChanges {
     });
 
     this.map.on('singleclick', (evt) => {
-      this.addMarker(evt.coordinate);
-      this.MarkersService.inicializar(evt.coordinate)
+      let id = this.MarkersService.generateUniqueId();
+      this.addMarker(id, evt.coordinate);
+      this.MarkersService.inicializar(id, evt.coordinate)
     });
 
     this.addInteractions();
 
     this.map.addLayer(this.vectorLayer);
+
+    console.log(this.map)
 
     this.recoverMarkers()
 
@@ -135,7 +138,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-  private addMarker = (coordinate: number[] | undefined): void => {
+  private addMarker = (id: number, coordinate: number[] | undefined): void => {
 
     if (!coordinate) return;
 
@@ -147,7 +150,7 @@ export class MapComponent implements OnInit, OnChanges {
     const startMarker = new Feature({
       type: 'point',
       geometry: new Point(coordinate),
-      properties: { id: this.MarkersService.indice }
+      id: id
     });
 
 
@@ -172,45 +175,26 @@ export class MapComponent implements OnInit, OnChanges {
     const modify = new Modify({ source: this.vectorSource });
 
     modify.on('modifyend', (evt) => {
-      let marcadoresPorGuardar: Marcador[] = []
-      let markers : Marcador[]=[];
 
-      console.log(evt);
+
+      let featureModified: Feature<Geometry> = evt.features.getArray()[0];
       console.log(this.vectorSource.getFeatures());
+      let coordinate = featureModified.getGeometry()?.getExtent().slice(0, 2)
+      console.log(coordinate)
+      //console.log(featureModified.getProperties()["id"]);
+      let id = featureModified.getProperties()["id"];
 
+      let markers = this.MarkersService.obtenerMarkers();
 
-      this.vectorSource.getFeatures().forEach((feature: Feature<Point>) => {
+      markers.forEach((marker)=>{
 
-       let coordinate = feature.getGeometry()?.getCoordinates();
-
-       markers= this.MarkersService.obtenerMarkers();
-
-
-
-       markers.forEach((marker) => {
-       console.log(marker.coordinate);
-        console.log(coordinate)
-         //console.log(marker.coordinate)
-         // let description = marker.description;
-          marcadoresPorGuardar.push({
-          coordinate: coordinate, description: marker.description, id: marker.id
-
-          })
-
-          console.log(marcadoresPorGuardar)
-
-       })
+        if(marker.id === id ){
+          marker.coordinate = coordinate;
+        }
 
       })
 
-      /*
-      obtener las coordenadas de los markers
-      this.vectorSource.getFeatures() esto es una array
-        en cada elemento del array
-        feature.getGeometry().getCoordinates() - esto devuelve un array de longitud latitud, coordinates
-      */
-
-     this.MarkersService.guardarMarkers(marcadoresPorGuardar)
+      this.MarkersService.guardarMarkers(markers)
 
 
     });
@@ -223,10 +207,11 @@ export class MapComponent implements OnInit, OnChanges {
   recoverMarkers(): void {
 
     const markersRecuperados = this.MarkersService.obtenerMarkers();
-
+    console.log(markersRecuperados);
     markersRecuperados.forEach((marker: Marcador) => {
       // this.MarkersService.inicializar(marker.coordinate)
-      this.addMarker(marker.coordinate);
+      this.addMarker(marker.id, marker.coordinate);
+
     })
 
   }

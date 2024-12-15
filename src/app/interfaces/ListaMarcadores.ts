@@ -1,6 +1,6 @@
 
 export interface Marcador {
-  id?:number;
+  id:number;
   coordinate?: number[],
   description?: string
 

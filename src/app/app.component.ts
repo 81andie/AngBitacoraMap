@@ -9,7 +9,7 @@ import { Marcador } from './interfaces/ListaMarcadores';
 export class AppComponent {
   title = 'AngBitacoraMap';
 
-  public temporaryMarkerToRemove:Marcador = {};
+  public temporaryMarkerToRemove:Marcador = {id:0};
   public newCoordinateCenter: number[]=[];
 
   closeHandler(marcador: Marcador){

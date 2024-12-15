@@ -15,15 +15,21 @@ export class MarkersService {
 
   constructor() { }
 
-  public indice:number = 0;
+
+
+  generateUniqueId(){
+    let date = new Date();
+    return date.getTime();
+
+  }
 
 
 
 
-  inicializar(coordinate: number[]): void {
-    this.indice += 1;
+  inicializar( id: number,coordinate: number[]): void {
+
     const newMarker: Marcador = {
-      id: this.indice,
+      id: id,
       coordinate: coordinate,
       description: ''
     };

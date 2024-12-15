@@ -10,7 +10,7 @@ import { Marcador } from '../../interfaces/ListaMarcadores';
 export class BottomnavComponent {
 
   public isBottomNavVisible: boolean = false;
-  public marcador: Marcador = {};
+  public marcador: Marcador = {id:0};
   @Output() public closeEventEmitter= new EventEmitter<Marcador>();
 
   constructor(private MarkersService: MarkersService){
