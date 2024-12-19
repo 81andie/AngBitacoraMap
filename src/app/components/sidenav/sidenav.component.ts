@@ -51,21 +51,23 @@ export class SidenavComponent implements OnInit {
     console.log("delete")
     let storageMarkers = this.MarkersService.obtenerMarkers();
     //fem veure que storageMarkers té 5 markers
-    let indexMarkerDelete = 0;
+    let indexMarkerDelete = -1;
     storageMarkers.forEach((marker, index) => {
 
-      indexMarkerDelete= index;
-
       if (marker.id === id ) {
-        //console.log(marker.id);
-        //console.log(id);
-       return
+        indexMarkerDelete = index;
+
       }
     })
+
+
     storageMarkers.splice(indexMarkerDelete, 1)
     this.MarkersService.guardarMarkers(storageMarkers)
 
   }
+
+
+
 
 }
 

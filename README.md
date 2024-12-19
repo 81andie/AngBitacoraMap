@@ -28,3 +28,42 @@ tarea 12
 poder importar en Geojson.
 
 
+
+
+objetivo: ser capaces de detectar si existe o no un elemento en la lista
+
+let array = [ 1,20,35,45,60];
+let indexTrobat = -1;
+
+array.forEach((num, index)=>{
+  if(num === 38){
+    indexTrobat = index;
+  }
+})
+
+console.log(indexTrobat);
+
+----------------------
+
+
+let index = GetIndexOfElementInArray(array, 11);
+
+-1
+index??
+
+function GetIndexOfElementInArray(array, element) {
+
+}
+
+
+
+
+
+let noExiste = !NumeroExiste(array, 38);
+
+// primera fase del bucle
+
+num = 1
+si el num1 existe
+
+
