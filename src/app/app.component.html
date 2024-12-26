@@ -9,7 +9,12 @@
 ></app-map>
 
 <router-outlet>
-  <app-sidenav (centerMapToCoordinateEmitter)="changeCenterOfMapHandler($event)"></app-sidenav>
+  <app-sidenav
+  (centerMapToCoordinateEmitter)="changeCenterOfMapHandler($event)"
+  (removeMapMarker)="closeHandler($event)"
+
+
+  ></app-sidenav>
   <app-bottomnav (closeEventEmitter)="closeHandler($event)"></app-bottomnav>
 
 

@@ -20,6 +20,7 @@ export class SidenavComponent implements OnInit {
   public marcadores: Marcador[] = [];
   private markersSubscription!: Subscription;
   @Output() public centerMapToCoordinateEmitter = new EventEmitter<number[]>();
+  @Output() public removeMapMarker = new EventEmitter<Marcador>();
 
   constructor(private MarkersService: MarkersService) { }
 
@@ -47,14 +48,14 @@ export class SidenavComponent implements OnInit {
   }
 
 
-  deleteMarker(id: number) {
+  deleteMarker(markerToRemove: Marcador) {
     console.log("delete")
     let storageMarkers = this.MarkersService.obtenerMarkers();
     //fem veure que storageMarkers té 5 markers
     let indexMarkerDelete = -1;
     storageMarkers.forEach((marker, index) => {
 
-      if (marker.id === id ) {
+      if (marker.id === markerToRemove.id) {
         indexMarkerDelete = index;
 
       }
@@ -63,8 +64,14 @@ export class SidenavComponent implements OnInit {
 
     storageMarkers.splice(indexMarkerDelete, 1)
     this.MarkersService.guardarMarkers(storageMarkers)
+    this.removeMapMarker.emit(markerToRemove)
 
   }
+
+
+
+
+
 
 
 

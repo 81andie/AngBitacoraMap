@@ -7,9 +7,6 @@ Editar los marcadores
 tarea 8 
 buscador de marcadores(buscar la descripción)
 
-tarea 10 
-Eliminar marcadores
-
 
 tarea 6 
 Poder dibujar puntos,lineas y polígonos
