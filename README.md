@@ -3,6 +3,11 @@
 
 tarea 7 
 Editar los marcadores
+Guardar els canvis al localStorage
+Millorar l'estil 
+Treure la descripció i deixar l'input en el moment editar
+Amagar els inputs en els que no hi estic interactuant.
+
 
 tarea 8 
 buscador de marcadores(buscar la descripción)

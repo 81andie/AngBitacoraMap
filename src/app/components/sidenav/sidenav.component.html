@@ -14,8 +14,15 @@
     <div class="form-floating text-dark" >
 
       <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let marker of marcadores">
+        <div class="" *ngIf="editMode">
+          <input type="text"
+          [(ngModel)]="marker.description"
+          />
+          <button>E</button>
+          <button (click)="cancelEdit()">X</button>
+        </div>
         <span class="list-item text-dark bg-light p-1 rounded-pill fs-3">{{marker.description}} </span>
-        <button><i class="fa-regular fa-pen-to-square"></i></button>
+        <button (click)="editDescription()"><i class="fa-regular fa-pen-to-square"></i></button>
         <button (click)="deleteMarker(marker)"><i class="fa-solid fa-trash-can"></i></button>
         <hr class="text-dark">
         <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1" (click)="centerMapToCoordinate(marker.coordinate)">{{marker.coordinate}}</span>

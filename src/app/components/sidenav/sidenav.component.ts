@@ -16,6 +16,7 @@ export class SidenavComponent implements OnInit {
 
 
   public isSidebarVisible: boolean = false;
+  public editMode: boolean = false;
 
   public marcadores: Marcador[] = [];
   private markersSubscription!: Subscription;
@@ -66,6 +67,15 @@ export class SidenavComponent implements OnInit {
     this.MarkersService.guardarMarkers(storageMarkers)
     this.removeMapMarker.emit(markerToRemove)
 
+  }
+
+  editDescription(){
+    console.log("editando")
+    this.editMode = true;
+  }
+
+  cancelEdit(){
+    this.editMode=false;
   }
 
 
