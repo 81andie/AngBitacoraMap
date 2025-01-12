@@ -83,6 +83,15 @@ export class SidenavComponent implements OnInit {
   }
 
 
+  saveToLocal(markerToSave:Marcador){
+
+    markerToSave.isEditMode=false;
+
+    this.MarkersService.guardarMarkers(this.marcadores)
+
+  }
+
+
 
 
 

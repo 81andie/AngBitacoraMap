@@ -18,7 +18,7 @@
           <input type="text"
           [(ngModel)]="marker.description"
           />
-          <button>E</button>
+          <button (click)="saveToLocal(marker)">G</button>
           <button (click)="cancelEdit(marker)">X</button>
         </div>
         <div *ngIf="!marker.isEditMode">
