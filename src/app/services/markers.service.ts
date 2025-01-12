@@ -31,7 +31,8 @@ export class MarkersService {
     const newMarker: Marcador = {
       id: id,
       coordinate: coordinate,
-      description: ''
+      description: '',
+      isEditMode:false
     };
     this.marcadorBorradorSubject.next(newMarker);
 
