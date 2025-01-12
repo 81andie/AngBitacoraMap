@@ -2,20 +2,27 @@
 
 
 tarea 7 
-Editar los marcadores
-Guardar els canvis al localStorage
-Millorar l'estil 
-Si cancelamos que el texto sea el anterior
+Editar marcadores
+- Millorar l'estil 
+
 
 
 
 tarea 8 
 buscador de marcadores(buscar la descripción)
+-añadir el input en el sidenav
+-filtrar las busquedas
 
 
 tarea 6 
 Poder dibujar puntos,lineas y polígonos
-Agregar descripción y agregar en lista del sidenav.
+-nou menu con 3 botones en el html
+-Cada btn añade una funcion de openlayers diferente.
+-Crear otra capa y otro vectorSource
+-Retocar los estilos para que no sean los que vienen por defecto de Openlayers
+-Agregar descripción y agregar en lista del sidenav.
+-Crear en por ejemplo Geojson Service
+-Guardar en localStorage
 
 
 
