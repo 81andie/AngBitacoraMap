@@ -1,11 +1,7 @@
 
-
-
 tarea 7 
 Editar marcadores
 - Millorar l'estil 
-
-
 
 
 tarea 8 
