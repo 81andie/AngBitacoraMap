@@ -5,7 +5,7 @@ tarea 7
 Editar los marcadores
 Guardar els canvis al localStorage
 Millorar l'estil 
-Treure la descripció i deixar l'input en el moment editar
+Si cancelamos que el texto sea el anterior
 
 
 

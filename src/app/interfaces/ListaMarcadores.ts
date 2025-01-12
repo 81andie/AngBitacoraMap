@@ -3,6 +3,7 @@ export interface Marcador {
   id:number;
   coordinate?: number[],
   description?: string,
-  isEditMode?:boolean
+  isEditMode?:boolean,
+  oldDescription?: string
 
 }

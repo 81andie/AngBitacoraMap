@@ -72,12 +72,14 @@ export class SidenavComponent implements OnInit {
   editDescription(markerToEdit: Marcador){
     console.log("editando")
     markerToEdit.isEditMode= true;
+    markerToEdit.oldDescription = markerToEdit.description;
 
 
   }
 
   cancelEdit(markerToCancel: Marcador){
    markerToCancel.isEditMode = false;
+   markerToCancel.description= markerToCancel.oldDescription;
   }
 
 
