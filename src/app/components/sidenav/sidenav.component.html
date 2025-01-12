@@ -21,9 +21,12 @@
           <button>E</button>
           <button (click)="cancelEdit(marker)">X</button>
         </div>
-        <span class="list-item text-dark bg-light p-1 rounded-pill fs-3">{{marker.description}} </span>
-        <button (click)="editDescription(marker)"><i class="fa-regular fa-pen-to-square"></i></button>
-        <button (click)="deleteMarker(marker)"><i class="fa-solid fa-trash-can"></i></button>
+        <div *ngIf="!marker.isEditMode">
+          <span class="list-item text-dark bg-light p-1 rounded-pill fs-3">{{marker.description}} </span>
+          <button (click)="editDescription(marker)"><i class="fa-regular fa-pen-to-square"></i></button>
+          <button (click)="deleteMarker(marker)"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+
         <hr class="text-dark">
         <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1" (click)="centerMapToCoordinate(marker.coordinate)">{{marker.coordinate}}</span>
 
