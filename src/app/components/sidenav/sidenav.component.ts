@@ -17,8 +17,10 @@ export class SidenavComponent implements OnInit {
 
   public isSidebarVisible: boolean = false;
   public editMode: boolean = false;
+  public textToFilter: string = '';
 
   public marcadores: Marcador[] = [];
+
   private markersSubscription!: Subscription;
   @Output() public centerMapToCoordinateEmitter = new EventEmitter<number[]>();
   @Output() public removeMapMarker = new EventEmitter<Marcador>();
@@ -69,34 +71,36 @@ export class SidenavComponent implements OnInit {
 
   }
 
-  editDescription(markerToEdit: Marcador){
+  editDescription(markerToEdit: Marcador) {
     console.log("editando")
-    markerToEdit.isEditMode= true;
+    markerToEdit.isEditMode = true;
     markerToEdit.oldDescription = markerToEdit.description;
 
 
   }
 
-  cancelEdit(markerToCancel: Marcador){
-   markerToCancel.isEditMode = false;
-   markerToCancel.description= markerToCancel.oldDescription;
+  cancelEdit(markerToCancel: Marcador) {
+    markerToCancel.isEditMode = false;
+    markerToCancel.description = markerToCancel.oldDescription;
   }
 
 
-  saveToLocal(markerToSave:Marcador){
+  saveToLocal(markerToSave: Marcador) {
 
-    markerToSave.isEditMode=false;
+    markerToSave.isEditMode = false;
 
     this.MarkersService.guardarMarkers(this.marcadores)
 
   }
 
 
+  filterMarkers() {
 
-
-
-
-
+    if (this.textToFilter.length > 0) {
+      return this.marcadores.filter(marcador => marcador.description?.includes(this.textToFilter))
+    }
+    return this.marcadores;
+  }
 
 
 }

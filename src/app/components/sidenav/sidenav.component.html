@@ -9,11 +9,15 @@
   </div>
 
   <div class="offcanvas-body text-light mt-2 p-1">
+
+    <input type="text"
+     [(ngModel)]="textToFilter"
+    >
     <p class="text-dark">Aqui tens els llocs guardats</p>
 
     <div class="form-floating text-dark" >
 
-      <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let marker of marcadores">
+      <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let marker of filterMarkers()">
         <div class="" *ngIf="marker.isEditMode">
           <input type="text"
           [(ngModel)]="marker.description"
