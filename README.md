@@ -6,8 +6,7 @@ Editar marcadores
 
 tarea 8 
 buscador de marcadores(buscar la descripción)
--añadir el input en el sidenav
--filtrar las busquedas
+-mejorar estilo
 
 
 tarea 6 
