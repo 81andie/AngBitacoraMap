@@ -1,5 +1,6 @@
 import { Component, Input, input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Modify, Snap } from 'ol/interaction.js';
+import {  Modify, Snap,  } from 'ol/interaction.js';
+import  Draw, { DrawEvent }  from 'ol/interaction/Draw';
 import Map from 'ol/Map.js';
 import OSM from 'ol/source/OSM.js';
 import TileLayer from 'ol/layer/Tile.js';
@@ -119,11 +120,16 @@ export class MapComponent implements OnInit, OnChanges {
       }),
     });
 
-    this.map.on('singleclick', (evt) => {
+
+
+  /*  this.map.on('singleclick', (evt) => {
       let id = this.MarkersService.generateUniqueId();
       this.addMarker(id, evt.coordinate);
       this.MarkersService.inicializar(id, evt.coordinate)
-    });
+    });*/
+
+    const snap = new Snap({source:this.vectorSource});
+    this.map.addInteraction(snap);
 
     this.addInteractions();
 
@@ -170,10 +176,11 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   addInteractions() {
-
     if (!this.map) return
-    const modify = new Modify({ source: this.vectorSource });
 
+
+
+    const modify = new Modify({ source: this.vectorSource });
     modify.on('modifyend', (evt) => {
 
 
@@ -198,8 +205,25 @@ export class MapComponent implements OnInit, OnChanges {
 
 
     });
-
     this.map.addInteraction(modify);
+
+    const draw = new Draw({
+      source: this.vectorSource,
+      type: "Point",
+    });
+
+    draw.on('drawend', (evt: DrawEvent) =>{
+      console.log(evt)
+      let drawnFeature = evt.feature
+
+      let id = this.MarkersService.generateUniqueId();
+      drawnFeature.set("id", id);
+      
+      let properties = drawnFeature.getProperties();
+      this.MarkersService.inicializar(id, properties['geometry'].flatCoordinates);
+
+    })
+    this.map.addInteraction(draw);
   }
 
 
