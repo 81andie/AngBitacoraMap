@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MarkersService } from '../../services/markers.service';
-import { Dibujo } from '../../interfaces/ListaMarcadores';
+import { Dibujo } from '../../interfaces/dibujo.interface';
 
 @Component({
   selector: 'app-bottomnav',

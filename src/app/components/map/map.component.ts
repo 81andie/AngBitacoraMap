@@ -11,7 +11,7 @@ import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { Dibujo } from '../../interfaces/ListaMarcadores';
+import { Dibujo } from '../../interfaces/dibujo.interface';
 import { MarkersService } from '../../services/markers.service';
 
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Dibujo } from './interfaces/ListaMarcadores';
+import { Dibujo } from './interfaces/dibujo.interface';
 
 @Component({
   selector: 'app-root',

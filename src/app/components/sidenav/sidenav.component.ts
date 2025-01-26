@@ -1,4 +1,4 @@
-import { Dibujo } from './../../interfaces/ListaMarcadores';
+import { Dibujo } from '../../interfaces/dibujo.interface';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MarkersService } from '../../services/markers.service';
 import { Subscription } from 'rxjs';
