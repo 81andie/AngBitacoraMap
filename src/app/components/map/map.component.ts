@@ -11,7 +11,7 @@ import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { Marcador } from '../../interfaces/ListaMarcadores';
+import { Dibujo } from '../../interfaces/ListaMarcadores';
 import { MarkersService } from '../../services/markers.service';
 
 
@@ -81,7 +81,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-  @Input() public temporaryMarkerToRemove: Marcador = { id: 0 };
+  @Input() public temporaryMarkerToRemove: Dibujo = { id: 0 };
   @Input() public newCenter: number[] = [];
 
   private vectorSource: any = new VectorSource({
@@ -246,7 +246,7 @@ export class MapComponent implements OnInit, OnChanges {
 
     const markersRecuperados = this.MarkersService.obtenerMarkers();
     console.log(markersRecuperados);
-    markersRecuperados.forEach((marker: Marcador) => {
+    markersRecuperados.forEach((marker: Dibujo) => {
       // this.MarkersService.inicializar(marker.coordinate)
       this.addMarker(marker.id, marker.coordinate);
 

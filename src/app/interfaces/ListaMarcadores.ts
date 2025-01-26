@@ -1,5 +1,5 @@
 
-export interface Marcador {
+export interface Dibujo {
   id:number;
   coordinate?: number[],
   description?: string,

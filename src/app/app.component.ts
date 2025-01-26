@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Marcador } from './interfaces/ListaMarcadores';
+import { Dibujo } from './interfaces/ListaMarcadores';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,10 @@ import { Marcador } from './interfaces/ListaMarcadores';
 export class AppComponent {
   title = 'AngBitacoraMap';
 
-  public temporaryMarkerToRemove:Marcador = {id:0};
+  public temporaryMarkerToRemove:Dibujo = {id:0};
   public newCoordinateCenter: number[]=[];
 
-  closeHandler(marcador: Marcador){
+  closeHandler(marcador: Dibujo){
     this.temporaryMarkerToRemove = marcador;
   }
 

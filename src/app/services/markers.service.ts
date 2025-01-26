@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Marcador } from '../interfaces/ListaMarcadores';
+import { Dibujo } from '../interfaces/ListaMarcadores';
 import { Subject } from 'rxjs';
 
 
@@ -8,10 +8,10 @@ import { Subject } from 'rxjs';
 })
 export class MarkersService {
 
-  public marcadorBorrador: Marcador= {id : 0};
+  public marcadorBorrador: Dibujo= {id : 0};
 
-  private marcadorBorradorSubject = new Subject<Marcador>();
-  private markersSubject = new Subject<Marcador[]>();
+  private marcadorBorradorSubject = new Subject<Dibujo>();
+  private markersSubject = new Subject<Dibujo[]>();
 
   constructor() { }
 
@@ -28,7 +28,7 @@ export class MarkersService {
 
   inicializar( id: number,coordinate: number[]): void {
 
-    const newMarker: Marcador = {
+    const newMarker: Dibujo = {
       id: id,
       coordinate: coordinate,
       description: '',
@@ -39,12 +39,12 @@ export class MarkersService {
   }
 
 
-  obtenerMarkers(): Marcador[] {
+  obtenerMarkers(): Dibujo[] {
     return JSON.parse(localStorage.getItem('markers') || "[]");
 
   }
 
-  guardarMarkers(markers:Marcador[]):void{
+  guardarMarkers(markers:Dibujo[]):void{
 
     localStorage.setItem('markers', JSON.stringify(markers));
     this.markersSubject.next(markers);
@@ -60,7 +60,7 @@ export class MarkersService {
   }
 
 
-  guardarMarcador(marker:Marcador){
+  guardarMarcador(marker:Dibujo){
 
     let marcadores = this.obtenerMarkers();
     marcadores.push(marker);

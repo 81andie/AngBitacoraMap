@@ -1,4 +1,4 @@
-import { Marcador } from './../../interfaces/ListaMarcadores';
+import { Dibujo } from './../../interfaces/ListaMarcadores';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MarkersService } from '../../services/markers.service';
 import { Subscription } from 'rxjs';
@@ -19,11 +19,11 @@ export class SidenavComponent implements OnInit {
   public editMode: boolean = false;
   public textToFilter: string = '';
 
-  public marcadores: Marcador[] = [];
+  public marcadores: Dibujo[] = [];
 
   private markersSubscription!: Subscription;
   @Output() public centerMapToCoordinateEmitter = new EventEmitter<number[]>();
-  @Output() public removeMapMarker = new EventEmitter<Marcador>();
+  @Output() public removeMapMarker = new EventEmitter<Dibujo>();
 
   constructor(private MarkersService: MarkersService) { }
 
@@ -51,7 +51,7 @@ export class SidenavComponent implements OnInit {
   }
 
 
-  deleteMarker(markerToRemove: Marcador) {
+  deleteMarker(markerToRemove: Dibujo) {
     console.log("delete")
     let storageMarkers = this.MarkersService.obtenerMarkers();
     //fem veure que storageMarkers té 5 markers
@@ -71,7 +71,7 @@ export class SidenavComponent implements OnInit {
 
   }
 
-  editDescription(markerToEdit: Marcador) {
+  editDescription(markerToEdit: Dibujo) {
     console.log("editando")
     markerToEdit.isEditMode = true;
     markerToEdit.oldDescription = markerToEdit.description;
@@ -79,13 +79,13 @@ export class SidenavComponent implements OnInit {
 
   }
 
-  cancelEdit(markerToCancel: Marcador) {
+  cancelEdit(markerToCancel: Dibujo) {
     markerToCancel.isEditMode = false;
     markerToCancel.description = markerToCancel.oldDescription;
   }
 
 
-  saveToLocal(markerToSave: Marcador) {
+  saveToLocal(markerToSave: Dibujo) {
 
     markerToSave.isEditMode = false;
 
