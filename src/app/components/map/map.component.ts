@@ -1,6 +1,6 @@
 import { Component, Input, input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import {  Modify, Snap,  } from 'ol/interaction.js';
-import  Draw, { DrawEvent }  from 'ol/interaction/Draw';
+import { Modify, Snap, } from 'ol/interaction.js';
+import Draw, { DrawEvent } from 'ol/interaction/Draw';
 import Map from 'ol/Map.js';
 import OSM from 'ol/source/OSM.js';
 import TileLayer from 'ol/layer/Tile.js';
@@ -93,7 +93,19 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   private vectorLayer = new VectorLayer({
-    source: this.vectorSource
+    source: this.vectorSource,
+    style: {
+      'fill-color': 'rgba(255, 255, 255, 0.2)',
+      'stroke-color': '#ffcc33',
+      'stroke-width': 2,
+      'circle-radius': 7,
+      'circle-fill-color': '#ffcc33',
+      'icon-src':'./assets/marker.png',
+      'icon-anchor': [0.6, 0.5],
+      'icon-scale': 0.3
+
+    }
+
   });
 
   private map: Map | null = null;
@@ -122,13 +134,13 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-  /*  this.map.on('singleclick', (evt) => {
-      let id = this.MarkersService.generateUniqueId();
-      this.addMarker(id, evt.coordinate);
-      this.MarkersService.inicializar(id, evt.coordinate)
-    });*/
+    /*  this.map.on('singleclick', (evt) => {
+        let id = this.MarkersService.generateUniqueId();
+        this.addMarker(id, evt.coordinate);
+        this.MarkersService.inicializar(id, evt.coordinate)
+      });*/
 
-    const snap = new Snap({source:this.vectorSource});
+    const snap = new Snap({ source: this.vectorSource });
     this.map.addInteraction(snap);
 
     this.addInteractions();
@@ -141,6 +153,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   }
+
 
 
 
@@ -193,9 +206,9 @@ export class MapComponent implements OnInit, OnChanges {
 
       let markers = this.MarkersService.obtenerMarkers();
 
-      markers.forEach((marker)=>{
+      markers.forEach((marker) => {
 
-        if(marker.id === id ){
+        if (marker.id === id) {
           marker.coordinate = coordinate;
         }
 
@@ -209,16 +222,17 @@ export class MapComponent implements OnInit, OnChanges {
 
     const draw = new Draw({
       source: this.vectorSource,
-      type: "Point",
+      type: "Point"
+
     });
 
-    draw.on('drawend', (evt: DrawEvent) =>{
+    draw.on('drawend', (evt: DrawEvent) => {
       console.log(evt)
       let drawnFeature = evt.feature
 
       let id = this.MarkersService.generateUniqueId();
       drawnFeature.set("id", id);
-      
+
       let properties = drawnFeature.getProperties();
       this.MarkersService.inicializar(id, properties['geometry'].flatCoordinates);
 
