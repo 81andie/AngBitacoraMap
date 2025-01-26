@@ -4,3 +4,10 @@
  position: absolute;
  z-index: 0;
 }
+
+.container_btn_dibujo{
+  position: absolute;
+  right: 0;
+  top:50vh;
+  z-index: 0;
+}

@@ -83,6 +83,7 @@ export class MapComponent implements OnInit, OnChanges {
 
   @Input() public temporaryMarkerToRemove: Dibujo = { id: 0 };
   @Input() public newCenter: number[] = [];
+  private drawInteraction: any = null;
 
   private vectorSource: any = new VectorSource({
     features: []
@@ -96,7 +97,7 @@ export class MapComponent implements OnInit, OnChanges {
     source: this.vectorSource,
     style: {
       'fill-color': 'rgba(255, 255, 255, 0.2)',
-      'stroke-color': '#ffcc33',
+      'stroke-color': 'rgba(255,0,0, 0.8)',
       'stroke-width': 2,
       'circle-radius': 7,
       'circle-fill-color': '#ffcc33',
@@ -143,7 +144,7 @@ export class MapComponent implements OnInit, OnChanges {
     const snap = new Snap({ source: this.vectorSource });
     this.map.addInteraction(snap);
 
-    this.addInteractions();
+    this.addInteractions('Point');
 
     this.map.addLayer(this.vectorLayer);
 
@@ -188,45 +189,51 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-  addInteractions() {
+  addInteractions(typeDraw:any) {
     if (!this.map) return
+    if(this.drawInteraction){
+      this.map.removeInteraction(this.drawInteraction)
+    }else{
+      const modify = new Modify({ source: this.vectorSource });
+      modify.on('modifyend', (evt) => {
+
+
+        let featureModified: Feature<Geometry> = evt.features.getArray()[0];
+        console.log(this.vectorSource.getFeatures());
+        let coordinate = featureModified.getGeometry()?.getExtent().slice(0, 2)
+        console.log(coordinate)
+        //console.log(featureModified.getProperties()["id"]);
+        let id = featureModified.getProperties()["id"];
+
+        let markers = this.MarkersService.obtenerMarkers();
+
+        markers.forEach((marker) => {
+
+          if (marker.id === id) {
+            marker.coordinate = coordinate;
+          }
+
+        })
+
+        this.MarkersService.guardarMarkers(markers)
+
+
+      });
+      this.map.addInteraction(modify);
+
+    }
 
 
 
-    const modify = new Modify({ source: this.vectorSource });
-    modify.on('modifyend', (evt) => {
 
 
-      let featureModified: Feature<Geometry> = evt.features.getArray()[0];
-      console.log(this.vectorSource.getFeatures());
-      let coordinate = featureModified.getGeometry()?.getExtent().slice(0, 2)
-      console.log(coordinate)
-      //console.log(featureModified.getProperties()["id"]);
-      let id = featureModified.getProperties()["id"];
-
-      let markers = this.MarkersService.obtenerMarkers();
-
-      markers.forEach((marker) => {
-
-        if (marker.id === id) {
-          marker.coordinate = coordinate;
-        }
-
-      })
-
-      this.MarkersService.guardarMarkers(markers)
-
-
-    });
-    this.map.addInteraction(modify);
-
-    const draw = new Draw({
+    this.drawInteraction = new Draw({
       source: this.vectorSource,
-      type: "Point"
+      type: typeDraw
 
     });
 
-    draw.on('drawend', (evt: DrawEvent) => {
+    this.drawInteraction.on('drawend', (evt: DrawEvent) => {
       console.log(evt)
       let drawnFeature = evt.feature
 
@@ -237,7 +244,7 @@ export class MapComponent implements OnInit, OnChanges {
       this.MarkersService.inicializar(id, properties['geometry'].flatCoordinates);
 
     })
-    this.map.addInteraction(draw);
+    this.map.addInteraction(this.drawInteraction);
   }
 
 
