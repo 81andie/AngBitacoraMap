@@ -13,6 +13,7 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Dibujo } from '../../interfaces/dibujo.interface';
 import { MarkersService } from '../../services/markers.service';
+import { noModifierKeys, primaryAction } from 'ol/events/condition';
 
 
 
@@ -173,6 +174,7 @@ export class MapComponent implements OnInit, OnChanges {
       id: id
     });
 
+    //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
 
     startMarker.setStyle(new Style({
       image: new Icon({
@@ -210,7 +212,7 @@ export class MapComponent implements OnInit, OnChanges {
         markers.forEach((marker) => {
 
           if (marker.id === id) {
-            marker.coordinate = coordinate;
+            marker.coordinatePoint = coordinate;
           }
 
         })
@@ -229,7 +231,9 @@ export class MapComponent implements OnInit, OnChanges {
 
     this.drawInteraction = new Draw({
       source: this.vectorSource,
-      type: typeDraw
+      type: typeDraw,
+      stopClick: true,
+      condition: (e) => noModifierKeys(e) && primaryAction(e),
 
     });
 
@@ -255,7 +259,7 @@ export class MapComponent implements OnInit, OnChanges {
     console.log(markersRecuperados);
     markersRecuperados.forEach((marker: Dibujo) => {
       // this.MarkersService.inicializar(marker.coordinate)
-      this.addMarker(marker.id, marker.coordinate);
+      this.addMarker(marker.id, marker.coordinatePoint);
 
     })
 

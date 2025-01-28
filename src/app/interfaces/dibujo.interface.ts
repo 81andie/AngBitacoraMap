@@ -1,9 +1,19 @@
 
 export interface Dibujo {
   id:number;
-  coordinate?: number[],
+  coordinatePoint?: number[], //hay que adaptarlo
   description?: string,
   isEditMode?:boolean,
   oldDescription?: string
 
+  /*
+  opcion 2
+  ++ mas claro (lo lees mejor programando)
+  -- por cada tipo de geometria que añadas, es una propiedad mas
+
+  coordinatePoint?: number[],
+  coordinateLineString?: number[][],
+  typeGeometry
+
+  */
 }

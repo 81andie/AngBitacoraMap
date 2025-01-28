@@ -30,7 +30,7 @@ export class MarkersService {
 
     const newMarker: Dibujo = {
       id: id,
-      coordinate: coordinate,
+      coordinatePoint: coordinate,
       description: '',
       isEditMode:false
     };
