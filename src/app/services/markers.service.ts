@@ -26,11 +26,12 @@ export class MarkersService {
 
 
 
-  inicializar( id: number,coordinate: number[]): void {
+  inicializar( id: number,coordinate: number[], typeGeometry:string): void {
 
     const newMarker: Dibujo = {
       id: id,
       coordinatePoint: coordinate,
+      typeGeometry,
       description: '',
       isEditMode:false
     };

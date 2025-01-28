@@ -1,7 +1,8 @@
 
 export interface Dibujo {
   id:number;
-  coordinatePoint?: number[], //hay que adaptarlo
+  coordinatePoint?: number[],
+  typeGeometry?: string,
   description?: string,
   isEditMode?:boolean,
   oldDescription?: string

@@ -159,9 +159,9 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-  private addMarker = (id: number, coordinate: number[] | undefined): void => {
+  private addMarker = (marker:Dibujo): void => {
 
-    if (!coordinate) return;
+    if (!marker.coordinatePoint) return;
 
 
     //this.markers.push(coordinate);
@@ -170,8 +170,8 @@ export class MapComponent implements OnInit, OnChanges {
 
     const startMarker = new Feature({
       type: 'point',
-      geometry: new Point(coordinate),
-      id: id
+      geometry: new Point(marker.coordinatePoint),
+      id: marker.id
     });
 
     //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
@@ -245,7 +245,7 @@ export class MapComponent implements OnInit, OnChanges {
       drawnFeature.set("id", id);
 
       let properties = drawnFeature.getProperties();
-      this.MarkersService.inicializar(id, properties['geometry'].flatCoordinates);
+      this.MarkersService.inicializar(id, properties['geometry'].flatCoordinates, "Point");
 
     })
     this.map.addInteraction(this.drawInteraction);
@@ -259,7 +259,7 @@ export class MapComponent implements OnInit, OnChanges {
     console.log(markersRecuperados);
     markersRecuperados.forEach((marker: Dibujo) => {
       // this.MarkersService.inicializar(marker.coordinate)
-      this.addMarker(marker.id, marker.coordinatePoint);
+      this.addMarker(marker);
 
     })
 
