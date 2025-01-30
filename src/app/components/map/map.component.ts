@@ -102,7 +102,7 @@ export class MapComponent implements OnInit, OnChanges {
       'stroke-width': 2,
       'circle-radius': 7,
       'circle-fill-color': '#ffcc33',
-      'icon-src':'./assets/marker.png',
+      'icon-src': './assets/marker.png',
       'icon-anchor': [0.6, 0.5],
       'icon-scale': 0.3
 
@@ -136,11 +136,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-    /*  this.map.on('singleclick', (evt) => {
-        let id = this.MarkersService.generateUniqueId();
-        this.addMarker(id, evt.coordinate);
-        this.MarkersService.inicializar(id, evt.coordinate)
-      });*/
+
 
     const snap = new Snap({ source: this.vectorSource });
     this.map.addInteraction(snap);
@@ -157,20 +153,19 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
 
+  //A: number[] | undefined
+  //B: number[]
+  //if(A !== undefined)
+  //A: number[]
 
+  private addMarker = (marker: Dibujo): void => {
 
-  private addMarker = (marker:Dibujo): void => {
+    if (!marker.coordinates?.coordinatePoint) return;
 
-    if (!marker.coordinatePoint) return;
-
-
-    //this.markers.push(coordinate);
-    // this.MarkersService.obtenerMarkers()
-
-
+    //contemplar el caso de marker.typeGeometry === LineString
     const startMarker = new Feature({
       type: 'point',
-      geometry: new Point(marker.coordinatePoint),
+      geometry: new Point(marker.coordinates.coordinatePoint),
       id: marker.id
     });
 
@@ -191,11 +186,11 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-  addInteractions(typeDraw:any) {
+  addInteractions(typeDraw: any) {
     if (!this.map) return
-    if(this.drawInteraction){
+    if (this.drawInteraction) {
       this.map.removeInteraction(this.drawInteraction)
-    }else{
+    } else {
       const modify = new Modify({ source: this.vectorSource });
       modify.on('modifyend', (evt) => {
 
@@ -205,17 +200,31 @@ export class MapComponent implements OnInit, OnChanges {
         let coordinate = featureModified.getGeometry()?.getExtent().slice(0, 2)
         console.log(coordinate)
         //console.log(featureModified.getProperties()["id"]);
-        let id = featureModified.getProperties()["id"];
+        let idModified = featureModified.getProperties()["id"];
 
         let markers = this.MarkersService.obtenerMarkers();
 
-        markers.forEach((marker) => {
+        markers.forEach(dibujo => {
+          if (dibujo.coordinates) {
+            if (dibujo.id === idModified) {
+              switch (dibujo.typeGeometry) {
+                case "Point": {
+                  dibujo.coordinates.coordinatePoint = coordinate;
+                  break;
+                }
 
-          if (marker.id === id) {
-            marker.coordinatePoint = coordinate;
-          }
+                case "LineString": {
+                  dibujo.coordinates.coordinateLineString = coordinate
+                  break;
 
-        })
+                }
+
+              }
+
+            }
+
+
+          })
 
         this.MarkersService.guardarMarkers(markers)
 
@@ -245,7 +254,7 @@ export class MapComponent implements OnInit, OnChanges {
       drawnFeature.set("id", id);
 
       let properties = drawnFeature.getProperties();
-      this.MarkersService.inicializar(id, properties['geometry'].flatCoordinates, "Point");
+      this.MarkersService.inicializar(id, properties['geometry'].flatCoordinates, typeDraw);
 
     })
     this.map.addInteraction(this.drawInteraction);
@@ -257,9 +266,19 @@ export class MapComponent implements OnInit, OnChanges {
 
     const markersRecuperados = this.MarkersService.obtenerMarkers();
     console.log(markersRecuperados);
-    markersRecuperados.forEach((marker: Dibujo) => {
-      // this.MarkersService.inicializar(marker.coordinate)
-      this.addMarker(marker);
+    markersRecuperados.forEach((dibujo: Dibujo) => {
+      /*
+      ++ codigo mas corto, mas claro, separado por funcionalidad
+      > cuidado de no replicar codigo: si hay cosas comunes, reutilitzarles
+      op 2 - 1 metodo para cada dibujo. addMarker, addLinestring, ...
+      */
+      if (dibujo.typeGeometry === "Point") {
+        this.addMarker(dibujo);
+
+      }
+
+
+
 
     })
 

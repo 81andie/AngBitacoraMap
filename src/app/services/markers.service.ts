@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Dibujo } from '../interfaces/dibujo.interface';
 import { Subject } from 'rxjs';
+import { Coordinates } from '../interfaces/coordinates.interface';
 
 
 @Injectable({
@@ -24,13 +25,24 @@ export class MarkersService {
   }
 
 
+/*
+++ No duplicas codigo. Preparado para crecer más.
+-- Puede ser confuso que solo tengas que definir 1 de las propiedades
+Op 3 - Crear nueva interficie de tipo Coordinates
+coordinatePoint
+coordinateLineString
+Dibujo -> Coordinates
 
+patata(a:number, b: string, a:number, b: string, a:number, b: string, a:number, b: string)
+patata(objecte: interficie)
+*/
 
-  inicializar( id: number,coordinate: number[], typeGeometry:string): void {
+  inicializar( id: number,coordinates: Coordinates, typeGeometry:string): void {
 
+    //contemplar el caso typeGeometry LineString
     const newMarker: Dibujo = {
       id: id,
-      coordinatePoint: coordinate,
+      coordinates: coordinates,
       typeGeometry,
       description: '',
       isEditMode:false

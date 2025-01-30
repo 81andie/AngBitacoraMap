@@ -1,11 +1,15 @@
+import { Coordinates } from "./coordinates.interface";
 
+//añadir nueva propiedad geometria lineas
 export interface Dibujo {
   id:number;
-  coordinatePoint?: number[],
+  coordinates?:Coordinates,
   typeGeometry?: string,
   description?: string,
   isEditMode?:boolean,
   oldDescription?: string
+
+
 
   /*
   opcion 2
