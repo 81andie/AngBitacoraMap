@@ -19,6 +19,10 @@ Poder dibujar puntos,lineas y polígonos
 -Crear en por ejemplo Geojson Service
 -Guardar en localStorage
 
+en progeso:
+-Acabar de corregir como inicializamos las lineas del localStorage
+-Cuando recuperarmos los markers cuando entramos en la web, tener en cuenta las lineas
+-Cuando hacemos click para centrar la geometria lo hemos dejado a medias.
 
 
 tarea 9

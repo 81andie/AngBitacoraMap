@@ -6,7 +6,7 @@ import OSM from 'ol/source/OSM.js';
 import TileLayer from 'ol/layer/Tile.js';
 import View from 'ol/View.js';
 import { Feature } from 'ol';
-import { Geometry, Point } from 'ol/geom';
+import { Geometry, LineString, Point } from 'ol/geom';
 import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
@@ -14,6 +14,7 @@ import VectorSource from 'ol/source/Vector';
 import { Dibujo } from '../../interfaces/dibujo.interface';
 import { MarkersService } from '../../services/markers.service';
 import { noModifierKeys, primaryAction } from 'ol/events/condition';
+import { Coordinates } from '../../interfaces/coordinates.interface';
 
 
 
@@ -196,35 +197,33 @@ export class MapComponent implements OnInit, OnChanges {
 
 
         let featureModified: Feature<Geometry> = evt.features.getArray()[0];
-        console.log(this.vectorSource.getFeatures());
-        let coordinate = featureModified.getGeometry()?.getExtent().slice(0, 2)
-        console.log(coordinate)
+        let geometry = featureModified.getGeometry();
+        let coordinates: Coordinates = {};
+        if (geometry instanceof Point) {
+          coordinates.coordinatePoint = geometry.getCoordinates()
+        }
+
+        if (geometry instanceof LineString) {
+          coordinates.coordinateLineString = geometry.getCoordinates()
+        }
+
+
+
+        console.log(featureModified.getGeometry())
         //console.log(featureModified.getProperties()["id"]);
         let idModified = featureModified.getProperties()["id"];
 
         let markers = this.MarkersService.obtenerMarkers();
 
         markers.forEach(dibujo => {
-          if (dibujo.coordinates) {
-            if (dibujo.id === idModified) {
-              switch (dibujo.typeGeometry) {
-                case "Point": {
-                  dibujo.coordinates.coordinatePoint = coordinate;
-                  break;
-                }
 
-                case "LineString": {
-                  dibujo.coordinates.coordinateLineString = coordinate
-                  break;
+          if (dibujo.id === idModified) {
+            dibujo.coordinates = coordinates;
 
-                }
-
-              }
-
-            }
+          }
 
 
-          })
+        })
 
         this.MarkersService.guardarMarkers(markers)
 
