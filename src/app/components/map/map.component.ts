@@ -252,8 +252,21 @@ export class MapComponent implements OnInit, OnChanges {
       let id = this.MarkersService.generateUniqueId();
       drawnFeature.set("id", id);
 
-      let properties = drawnFeature.getProperties();
-      this.MarkersService.inicializar(id, properties['geometry'].flatCoordinates, typeDraw);
+      let geometry = drawnFeature.getGeometry();
+
+      let coordinates: Coordinates = {};
+
+      if (geometry instanceof Point) {
+        coordinates.coordinatePoint = geometry.getCoordinates()
+      }
+
+      if (geometry instanceof LineString) {
+        coordinates.coordinateLineString = geometry.getCoordinates()
+      }
+
+
+
+      this.MarkersService.inicializar(id, coordinates, typeDraw);
 
     })
     this.map.addInteraction(this.drawInteraction);
