@@ -184,6 +184,30 @@ export class MapComponent implements OnInit, OnChanges {
     //console.log('Marcadores:', this.markers);
   }
 
+  private addLineString = (lineString: Dibujo): void => {
+
+    if (!lineString.coordinates?.coordinateLineString) return;
+
+    //contemplar el caso de marker.typeGeometry === LineString
+    const line = new Feature({
+      type: 'lineString',
+      geometry: new LineString (lineString.coordinates.coordinateLineString),
+      id: lineString.id
+    });
+
+    //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
+
+
+
+    this.vectorSource.addFeature(line);
+    //console.log('Marcadores:', this.markers);
+  }
+
+
+
+
+
+
 
 
 
@@ -289,12 +313,15 @@ export class MapComponent implements OnInit, OnChanges {
 
       }
 
+      if (dibujo.typeGeometry === "LineString") {
+         this.addLineString(dibujo);
 
-
-
+      }
     })
 
   }
+
+
 
 
 

@@ -21,7 +21,7 @@ Poder dibujar puntos,lineas y polígonos
 
 en progeso:
 
--Cuando recuperarmos los markers cuando entramos en la web, tener en cuenta las lineas
+
 -Cuando hacemos click para centrar la geometria lo hemos dejado a medias.
 
 
