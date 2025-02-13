@@ -23,6 +23,7 @@ en progeso:
 
 
 -Cuando hacemos click para centrar la geometria lo hemos dejado a medias.
+-Asignar la geometria fent servir Dibujo para poder centrar en el mapa.
 
 
 tarea 9

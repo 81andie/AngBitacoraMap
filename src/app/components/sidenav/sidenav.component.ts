@@ -22,7 +22,7 @@ export class SidenavComponent implements OnInit {
   public marcadores: Dibujo[] = [];
 
   private markersSubscription!: Subscription;
-  @Output() public centerMapToCoordinateEmitter = new EventEmitter<number[]>();
+  @Output() public centerMapToCoordinateEmitter = new EventEmitter<Dibujo>();
   @Output() public removeMapMarker = new EventEmitter<Dibujo>();
 
   constructor(private MarkersService: MarkersService) { }
@@ -50,7 +50,7 @@ export class SidenavComponent implements OnInit {
 
   centerMapToCoordinate(dibujo:Dibujo) {
     //todo, cambiarlo para que pueda contemplar point o lineString
-    this.centerMapToCoordinateEmitter.emit(dibujo.coordinates?.coordinatePoint);
+    this.centerMapToCoordinateEmitter.emit(dibujo);
   }
 
 

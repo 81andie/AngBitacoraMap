@@ -44,9 +44,32 @@ export class MapComponent implements OnInit, OnChanges {
 
     */
 
-    if (changes['newCenter'] && this.map) {
-      console.log(changes['newCenter'])
-      this.map.getView().setCenter(changes['newCenter'].currentValue)
+    if (changes['dibujoACentrar'] && this.map) {
+      console.log(changes['dibujoACentrar'])
+      let dibujo = changes['dibujoACentrar'].currentValue
+
+      //opcio 2
+      //fit(geometry)
+      //cal creare la geometry des d'un dibujo
+
+
+      /*
+      changes? -> changes['newCenter']
+      changes -> changes['dibujo']!!!!!!
+      */
+
+      //dibujo?
+
+      //new Point(dibujo.coordinates.coordinatePoint)
+      //new Point([123, 3442])
+
+      //new LineString(dibujo.coordinates.coordinateLineString)
+      //new LineString([[21231, 213], [23312, 1231] ])
+
+      //const geometry = Hem de fer codi per assignar geometria
+      //this.map.getView().fit(geometry)
+
+      this.map.getView().setCenter(centerCoordinate)
     } else if (changes['temporaryMarkerToRemove'] && this.map) {
       console.log(changes['temporaryMarkerToRemove'])
 
@@ -84,7 +107,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   @Input() public temporaryMarkerToRemove: Dibujo = { id: 0 };
-  @Input() public newCenter: number[] = [];
+  @Input() public dibujoACentrar: Dibujo ={id : 0};
   private drawInteraction: any = null;
 
   private vectorSource: any = new VectorSource({
