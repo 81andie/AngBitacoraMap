@@ -51,6 +51,8 @@ export class SidenavComponent implements OnInit {
   centerMapToCoordinate(dibujo:Dibujo) {
     //todo, cambiarlo para que pueda contemplar point o lineString
     this.centerMapToCoordinateEmitter.emit(dibujo);
+    this.isSidebarVisible = false;
+
   }
 
 
