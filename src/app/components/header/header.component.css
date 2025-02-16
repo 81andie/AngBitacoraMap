@@ -1,15 +1,13 @@
 .header {
   position: fixed;
-  top: 0;
+  height: 80px;
+ 
   z-index: 1;
   background-image: linear-gradient(rgba(11, 11, 11, 0.817), rgba(246, 191, 246, 0));
-
+  filter:drop-shadow(2px 2px black)
 }
 
-.logo{
-  width: 8vw;
-  height: auto;
-}
+
 
 
 
