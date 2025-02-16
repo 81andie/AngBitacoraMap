@@ -61,15 +61,28 @@ export class MapComponent implements OnInit, OnChanges {
       //dibujo?
 
       //new Point(dibujo.coordinates.coordinatePoint)
-      //new Point([123, 3442])
+
 
       //new LineString(dibujo.coordinates.coordinateLineString)
-      //new LineString([[21231, 213], [23312, 1231] ])
 
       //const geometry = Hem de fer codi per assignar geometria
-      //this.map.getView().fit(geometry)
 
-      this.map.getView().setCenter(centerCoordinate)
+      let geometry;
+
+      if (dibujo.typeGeometry === "Point") {
+        geometry = new Point(dibujo.coordinates.coordinatePoint)
+      }
+
+      if (dibujo.typeGeometry === "LineString") {
+        geometry = new LineString(dibujo.coordinates.coordinateLineString)
+      }
+      if (geometry) {
+        this.map.getView().fit(geometry,{maxZoom:18, padding: [120, 120, 120, 120]})
+      }
+
+
+
+      //  this.map.getView().fit()
     } else if (changes['temporaryMarkerToRemove'] && this.map) {
       console.log(changes['temporaryMarkerToRemove'])
 
@@ -107,7 +120,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   @Input() public temporaryMarkerToRemove: Dibujo = { id: 0 };
-  @Input() public dibujoACentrar: Dibujo ={id : 0};
+  @Input() public dibujoACentrar: Dibujo = { id: 0 };
   private drawInteraction: any = null;
 
   private vectorSource: any = new VectorSource({
@@ -214,7 +227,7 @@ export class MapComponent implements OnInit, OnChanges {
     //contemplar el caso de marker.typeGeometry === LineString
     const line = new Feature({
       type: 'lineString',
-      geometry: new LineString (lineString.coordinates.coordinateLineString),
+      geometry: new LineString(lineString.coordinates.coordinateLineString),
       id: lineString.id
     });
 
@@ -337,7 +350,7 @@ export class MapComponent implements OnInit, OnChanges {
       }
 
       if (dibujo.typeGeometry === "LineString") {
-         this.addLineString(dibujo);
+        this.addLineString(dibujo);
 
       }
     })

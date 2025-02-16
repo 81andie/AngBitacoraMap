@@ -8,22 +8,10 @@ tarea 8
 buscador de marcadores(buscar la descripción)
 -mejorar estilo
 
+tarea 6
 
-tarea 6 
-Poder dibujar puntos,lineas y polígonos
--nou menu con 3 botones en el html
--Cada btn añade una funcion de openlayers diferente.
--Crear otra capa y otro vectorSource
--Retocar los estilos para que no sean los que vienen por defecto de Openlayers
--Agregar descripción y agregar en lista del sidenav.
--Crear en por ejemplo Geojson Service
--Guardar en localStorage
-
-en progeso:
-
-
--Cuando hacemos click para centrar la geometria lo hemos dejado a medias.
--Asignar la geometria fent servir Dibujo para poder centrar en el mapa.
+en progreso
+dibujar poligonos
 
 
 tarea 9
@@ -35,6 +23,9 @@ poder exportar en Geojson.
 
 tarea 12
 poder importar en Geojson.
+
+tarea 13 
+poder abrir y cerrar el sidenav
 
 
 
