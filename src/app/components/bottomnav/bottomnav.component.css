@@ -1,11 +1,10 @@
 .container-nav {
-  position: absolute;
-  width: 370px;
+ position: absolute;
   padding: 5px 10px;
-  height: 100px;
-  left: 45%;
-  margin-left: -160px;
-  bottom: 20px;
+  height: 120px;
+  /*left: 50%;*/
+  /*margin-left: -250px;*/
+  
   z-index: 10;
   background-color: white;
   border-radius: 5px;
