@@ -2,7 +2,12 @@
   <div id="map"></div>
 
 <div class="container_btn_dibujo">
-  <button type="submit" (click)="addInteractions('LineString')">linea</button>
-  <button type="submit" (click)="addInteractions('Point')">Marcador</button>
+  <button type="submit" (click)="addInteractions('LineString')" class="p-1 rounded-3 btn btn-light   shadow-sm">
+    <svg height="20" width="30" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="0" x2="200" y2="100" style="stroke:red;stroke-width:2" />
+    </svg>
+    linea</button>
+  <button type="submit" (click)="addInteractions('Point')" class="p-1 rounded-3 btn btn-light">
+    <img src="assets/marker.png" class="w-25 "/> Marcador</button>
 </div>
 

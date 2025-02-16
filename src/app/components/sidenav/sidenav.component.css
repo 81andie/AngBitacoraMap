@@ -1,9 +1,8 @@
 .parrafo{
   position: absolute;
   top: 10px;
-  left: -480px;
+  left: -560px;
   overflow-x: hidden;
-  width: 32vw;
   height: 100vh;
   z-index: 500;
   transition: left 0.7s ease;
@@ -11,7 +10,6 @@
 
 .marcador{
   background-color: rgb(248, 246, 243);
-
 }
 
 

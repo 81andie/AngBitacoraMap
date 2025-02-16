@@ -6,8 +6,17 @@
 }
 
 .container_btn_dibujo{
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 3px;
+  gap: 10px;
+ 
   position: absolute;
   right: 0;
   top:50vh;
   z-index: 0;
 }
+

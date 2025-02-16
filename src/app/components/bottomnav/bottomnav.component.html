@@ -1,12 +1,22 @@
 <div [hidden]="!isBottomNavVisible" class="container-nav">
+  <label class="text-xxl-end">Escriu on vols anar i guarda...</label>
+  <div class="container-nav-inputs container-fluid p-1">
 
-  <label>Escribe dónde quieres ir</label>
-  <div class="container-nav-inputs">
-    <input type="text"
-    [(ngModel)]="marcador.description"
-    />
-    <button class="button button-save" (click)="save()"><i class="fa-regular fa-floppy-disk"></i></button>
-    <button class="button button-close" (click)="close()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="input-group mb-3">
+
+      <input type="text"
+      [(ngModel)]="marcador.description"
+      class="form-control w-full"
+      placeholder="Vull anar a la Sagrada Família..."
+      />
+
+      <button class="button button-save" (click)="save()"><i class="fa-regular fa-floppy-disk"></i></button>
+      <button class="button button-close" (click)="close()"><i class="fa-solid fa-xmark"></i></button>
+
+
+    </div>
+
+
   </div>
 
 </div>
