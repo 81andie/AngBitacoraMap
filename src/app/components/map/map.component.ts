@@ -81,7 +81,6 @@ export class MapComponent implements OnInit, OnChanges {
       }
 
 
-
       //  this.map.getView().fit()
     } else if (changes['temporaryMarkerToRemove'] && this.map) {
       console.log(changes['temporaryMarkerToRemove'])
@@ -110,25 +109,19 @@ export class MapComponent implements OnInit, OnChanges {
         if (properties['geometry'].flatCoordinates[0] === marker.coordinate[0] && properties['geometry'].flatCoordinates[1] === marker.coordinate[1]) {
           this.vectorSource.removeFeature(feature);
         }
-
-
       })
-
     }
   }
 
 
-
   @Input() public temporaryMarkerToRemove: Dibujo = { id: 0 };
   @Input() public dibujoACentrar: Dibujo = { id: 0 };
+
   private drawInteraction: any = null;
 
   private vectorSource: any = new VectorSource({
     features: []
   });
-
-
-
 
 
   private vectorLayer = new VectorLayer({
@@ -233,18 +226,9 @@ export class MapComponent implements OnInit, OnChanges {
 
     //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
 
-
-
     this.vectorSource.addFeature(line);
     //console.log('Marcadores:', this.markers);
   }
-
-
-
-
-
-
-
 
 
   addInteractions(typeDraw: any) {
@@ -266,8 +250,6 @@ export class MapComponent implements OnInit, OnChanges {
         if (geometry instanceof LineString) {
           coordinates.coordinateLineString = geometry.getCoordinates()
         }
-
-
 
         console.log(featureModified.getGeometry())
         //console.log(featureModified.getProperties()["id"]);
@@ -292,9 +274,6 @@ export class MapComponent implements OnInit, OnChanges {
       this.map.addInteraction(modify);
 
     }
-
-
-
 
 
     this.drawInteraction = new Draw({
@@ -324,8 +303,6 @@ export class MapComponent implements OnInit, OnChanges {
         coordinates.coordinateLineString = geometry.getCoordinates()
       }
 
-
-
       this.MarkersService.inicializar(id, coordinates, typeDraw);
 
     })
@@ -335,7 +312,6 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   recoverMarkers(): void {
-
     const markersRecuperados = this.MarkersService.obtenerMarkers();
     console.log(markersRecuperados);
     markersRecuperados.forEach((dibujo: Dibujo) => {
@@ -346,21 +322,13 @@ export class MapComponent implements OnInit, OnChanges {
       */
       if (dibujo.typeGeometry === "Point") {
         this.addMarker(dibujo);
-
       }
 
       if (dibujo.typeGeometry === "LineString") {
         this.addLineString(dibujo);
-
       }
     })
 
   }
-
-
-
-
-
-
 
 }
