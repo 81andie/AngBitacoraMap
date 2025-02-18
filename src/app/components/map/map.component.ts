@@ -6,7 +6,7 @@ import OSM from 'ol/source/OSM.js';
 import TileLayer from 'ol/layer/Tile.js';
 import View from 'ol/View.js';
 import { Feature } from 'ol';
-import { Geometry, LineString, Point } from 'ol/geom';
+import { Geometry, LineString, Point, Polygon } from 'ol/geom';
 import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
@@ -76,6 +76,13 @@ export class MapComponent implements OnInit, OnChanges {
       if (dibujo.typeGeometry === "LineString") {
         geometry = new LineString(dibujo.coordinates.coordinateLineString)
       }
+
+      if (dibujo.typeGeometry === "Polygon") {
+        geometry = new Polygon(dibujo.coordinates.coordinatePolygon)
+      }
+
+
+
       if (geometry) {
         this.map.getView().fit(geometry,{maxZoom:18, padding: [120, 120, 120, 120]})
       }
@@ -83,30 +90,13 @@ export class MapComponent implements OnInit, OnChanges {
 
       //  this.map.getView().fit()
     } else if (changes['temporaryMarkerToRemove'] && this.map) {
-      console.log(changes['temporaryMarkerToRemove'])
 
-      /**
-       * guardar pixeles de ejecutar map.getPixelFromCoordinate(coordinate del marcador a borrar)
-       * ejecutar la function map.getFeaturesAtPixel(pixelAnterior, {hitTolerance: 50})
-       * la funcion te da una array de features que estan cerca de la coordenada del marcador
-       * por cada feature
-       *  comprovar si la feature es la misma que el marcador
-       *  una vez sabes sin ninguna duda que la feature es el marcador
-       *  vectorSource.removeFeature(feature);
-      */
+      let dibujo = changes['temporaryMarkerToRemove'].currentValue;
+      let features = this.vectorSource.getFeatures()
 
-      let marker = changes['temporaryMarkerToRemove'].currentValue;
-      console.log(marker)
-
-      let pixel = this.map.getPixelFromCoordinate(marker.coordinate)
-
-      let features = this.map.getFeaturesAtPixel(pixel, { hitTolerance: 50 })
-
-      features.forEach((feature) => {
-        let properties = feature.getProperties();
-        console.log(properties['geometry'].flatCoordinates);
-
-        if (properties['geometry'].flatCoordinates[0] === marker.coordinate[0] && properties['geometry'].flatCoordinates[1] === marker.coordinate[1]) {
+      features.forEach((feature: Feature) => {
+        let featureId = feature.getProperties()["id"];
+        if (featureId === dibujo.id) {
           this.vectorSource.removeFeature(feature);
         }
       })
@@ -231,6 +221,24 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
 
+  private addPolygon = (polygon: Dibujo): void => {
+
+    if (!polygon.coordinates?.coordinatePolygon) return;
+
+    //contemplar el caso de marker.typeGeometry === LineString
+    const polygonDraw = new Feature({
+      type: 'polygon',
+      geometry: new Polygon (polygon.coordinates.coordinatePolygon),
+      id: polygon.id
+    });
+
+    //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
+
+    this.vectorSource.addFeature(polygonDraw);
+    //console.log('Marcadores:', this.markers);
+  }
+
+
   addInteractions(typeDraw: any) {
     if (!this.map) return
     if (this.drawInteraction) {
@@ -249,6 +257,10 @@ export class MapComponent implements OnInit, OnChanges {
 
         if (geometry instanceof LineString) {
           coordinates.coordinateLineString = geometry.getCoordinates()
+        }
+
+        if (geometry instanceof Polygon) {
+          coordinates.coordinatePolygon = geometry.getCoordinates()
         }
 
         console.log(featureModified.getGeometry())
@@ -303,6 +315,10 @@ export class MapComponent implements OnInit, OnChanges {
         coordinates.coordinateLineString = geometry.getCoordinates()
       }
 
+      if (geometry instanceof Polygon) {
+        coordinates.coordinatePolygon = geometry.getCoordinates()
+      }
+
       this.MarkersService.inicializar(id, coordinates, typeDraw);
 
     })
@@ -326,6 +342,10 @@ export class MapComponent implements OnInit, OnChanges {
 
       if (dibujo.typeGeometry === "LineString") {
         this.addLineString(dibujo);
+      }
+
+      if(dibujo.typeGeometry === "Polygon"){
+        this.addPolygon(dibujo)
       }
     })
 
