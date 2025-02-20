@@ -11,7 +11,7 @@
   <div class="offcanvas-body text-light mt-2 p-1">
 
     <div class="input-group input-group-lg">
-      <span class="input-group-text bg-primary text-white" id="inputGroup-sizing-lg">Busca</span>
+      <span class="input-group-text bg-light text-danger" id="inputGroup-sizing-lg"><i class="fa-solid fa-magnifying-glass-location"></i></span>
       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"   [(ngModel)]="textToFilter">
     </div>
 
@@ -23,20 +23,29 @@
 
       <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let marker of filterMarkers()">
         <div class="" *ngIf="marker.isEditMode">
-          <input type="text"
-          [(ngModel)]="marker.description"
-          />
-          <button (click)="saveToLocal(marker)">G</button>
-          <button (click)="cancelEdit(marker)">X</button>
+
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username with two button addons"
+            [(ngModel)]="marker.description">
+            <button class="btn btn-outline-success" type="button" (click)="saveToLocal(marker)">Guardar</button>
+            <button class="btn btn-outline-danger" type="button" (click)="cancelEdit(marker)">Cancelar</button>
+          </div>
         </div>
         <div *ngIf="!marker.isEditMode">
-          <span class="list-item text-dark bg-light p-1 rounded-pill fs-3">{{marker.description}} </span>
-          <button (click)="editDescription(marker)"><i class="fa-regular fa-pen-to-square"></i></button>
-          <button (click)="deleteMarker(marker)"><i class="fa-solid fa-trash-can"></i></button>
+          <div class="d-flex justify-content-between  ">
+            <span class="list-item text-dark bg-light p-1 rounded-pill fs-3">{{marker.description}} </span>
+
+           <div class="d-flex gap-1">
+            <button (click)="editDescription(marker)" class="btn btn-outline-success "><i class="fa-regular fa-pen-to-square"></i></button>
+            <button (click)="deleteMarker(marker)" class="btn btn-outline-danger" ><i class="fa-solid fa-trash-can"></i></button>
+           </div>
+
+          </div>
+
         </div>
 
         <hr class="text-dark">
-        <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1" (click)="centerMapToCoordinate(marker)">hola en pensarem després</span>
+        <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1" (click)="centerMapToCoordinate(marker)">Centrar en el mapa</span>
 
       </div>
       <!-- <textarea class="form-control text-dark h-25 " placeholder="Escriu..." id="floatingTextarea"></textarea>
