@@ -11,6 +11,7 @@ import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import GeoJSON from 'ol/format/GeoJSON.js';
 import { Dibujo } from '../../interfaces/dibujo.interface';
 import { MarkersService } from '../../services/markers.service';
 import { noModifierKeys, primaryAction } from 'ol/events/condition';
@@ -349,6 +350,20 @@ export class MapComponent implements OnInit, OnChanges {
       }
     })
 
+  }
+
+
+  downloadGeoJSON(){
+
+  const geoJSONGenerado= new GeoJSON().writeFeatures(this.vectorSource.getFeatures())
+
+const newBlob = new Blob([geoJSONGenerado], { type: "text/json" });
+const data = window.URL.createObjectURL(newBlob);
+const link = document.createElement("a");
+link.href = data;
+link.download = "BitacoraMap.geojson"; // set a name for the file
+link.click();
+  console.log(geoJSONGenerado);
   }
 
 }
