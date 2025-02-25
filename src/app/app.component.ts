@@ -22,7 +22,7 @@ export class AppComponent {
 
 
   updateDescriptionHandler (marcador: Dibujo){
-    this.temporaryMarkerToRemove = marcador;
+    //this.temporaryMarkerToRemove = marcador;
   }
 
 
