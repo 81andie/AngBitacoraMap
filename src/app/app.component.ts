@@ -18,8 +18,14 @@ export class AppComponent {
 
   changeCenterOfMapHandler(dibujo: Dibujo){
     this.dibujoACentrar= dibujo;
-
   }
+
+
+  updateDescriptionHandler (marcador: Dibujo){
+    this.temporaryMarkerToRemove = marcador;
+  }
+
+
 }
 
 

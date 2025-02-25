@@ -15,7 +15,9 @@
 
 
   ></app-sidenav>
-  <app-bottomnav (closeEventEmitter)="closeHandler($event)"></app-bottomnav>
+  <app-bottomnav (closeEventEmitter)="closeHandler($event)"
+                 (updateDescriptionEventEmitter)="updateDescriptionHandler($event)"
+  ></app-bottomnav>
 
 
 </router-outlet>

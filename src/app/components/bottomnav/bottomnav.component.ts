@@ -10,25 +10,27 @@ import { Dibujo } from '../../interfaces/dibujo.interface';
 export class BottomnavComponent {
 
   public isBottomNavVisible: boolean = false;
-  public marcador: Dibujo = {id:0};
+  public dibujo: Dibujo = {id:0};
   @Output() public closeEventEmitter= new EventEmitter<Dibujo>();
+  @Output() public updateDescriptionEventEmitter= new EventEmitter<Dibujo>();
 
   constructor(private MarkersService: MarkersService){
 
     this.MarkersService.obtenerSubscripcionMarcador().subscribe((marcador:Dibujo)=>{
-      this.marcador= marcador;
-      console.log(this.marcador)
+      this.dibujo= marcador;
+      console.log(this.dibujo)
       this.isBottomNavVisible = true;
     })
   }
 
   save() {
+    this.updateDescriptionEventEmitter.emit(this.dibujo)
     this.isBottomNavVisible= false;
-    this.MarkersService.guardarMarcador(this.marcador)
+    this.MarkersService.guardarMarcador(this.dibujo)
   }
   close(){
     this.isBottomNavVisible= false;
-    this.closeEventEmitter.emit(this.marcador)
+    this.closeEventEmitter.emit(this.dibujo)
 
   }
 
