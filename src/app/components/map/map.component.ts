@@ -108,6 +108,8 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() public temporaryMarkerToRemove: Dibujo = { id: 0 };
   @Input() public dibujoACentrar: Dibujo = { id: 0 };
 
+  public  activeTool: string | null = null;
+
   private drawInteraction: any = null;
 
   private vectorSource: any = new VectorSource({
@@ -244,6 +246,7 @@ export class MapComponent implements OnInit, OnChanges {
     if (!this.map) return
     if (this.drawInteraction) {
       this.map.removeInteraction(this.drawInteraction)
+      this.activeTool = null
     } else {
       const modify = new Modify({ source: this.vectorSource });
       modify.on('modifyend', (evt) => {
@@ -286,6 +289,7 @@ export class MapComponent implements OnInit, OnChanges {
       });
       this.map.addInteraction(modify);
 
+
     }
 
 
@@ -324,6 +328,7 @@ export class MapComponent implements OnInit, OnChanges {
 
     })
     this.map.addInteraction(this.drawInteraction);
+    this.activeTool = typeDraw
   }
 
 
