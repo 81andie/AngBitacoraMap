@@ -360,7 +360,11 @@ export class MapComponent implements OnInit, OnChanges {
       ++ codigo mas corto, mas claro, separado por funcionalidad
       > cuidado de no replicar codigo: si hay cosas comunes, reutilitzarles
       op 2 - 1 metodo para cada dibujo. addMarker, addLinestring, ...
+
+
       */
+
+      console.log(dibujo)
       if (dibujo.typeGeometry === "Point") {
         this.addMarker(dibujo);
       }
