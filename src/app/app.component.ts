@@ -11,6 +11,9 @@ export class AppComponent {
 
   public temporaryMarkerToRemove:Dibujo = {id:0};
   public dibujoACentrar: Dibujo = {id:0};
+  public updateDescription: Dibujo = {id:0};
+
+
 
   closeHandler(marcador: Dibujo){
     this.temporaryMarkerToRemove = marcador;
@@ -21,8 +24,10 @@ export class AppComponent {
   }
 
 
-  updateDescriptionHandler (marcador: Dibujo){
+  updateDescriptionHandler (dibujo: Dibujo){
     //this.temporaryMarkerToRemove = marcador;
+    this.updateDescription = dibujo;
+
   }
 
 

@@ -85,7 +85,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
       if (geometry) {
-        this.map.getView().fit(geometry,{maxZoom:18, padding: [120, 120, 120, 120]})
+        this.map.getView().fit(geometry, { maxZoom: 18, padding: [120, 120, 120, 120] })
       }
 
 
@@ -101,14 +101,31 @@ export class MapComponent implements OnInit, OnChanges {
           this.vectorSource.removeFeature(feature);
         }
       })
+    } else if (changes['updateDescription'] && this.map) {
+      let dibujo = changes['updateDescription'].currentValue;
+      let features = this.vectorSource.getFeatures();
+
+      features.forEach((feature: Feature) => {
+        let featureId = feature.getProperties()["id"];
+        if (featureId === dibujo.id) {
+          //agafar description del dibujo
+          let description= dibujo.description;
+
+          //posar description dintre la feature
+          feature.set("description", description)
+
+        }
+      })
     }
   }
 
 
   @Input() public temporaryMarkerToRemove: Dibujo = { id: 0 };
   @Input() public dibujoACentrar: Dibujo = { id: 0 };
+  @Input() public updateDescription: Dibujo = { id: 0 };
 
-  public  activeTool: string | null = null;
+
+  public activeTool: string | null = null;
 
   private drawInteraction: any = null;
 
@@ -185,6 +202,8 @@ export class MapComponent implements OnInit, OnChanges {
 
     if (!marker.coordinates?.coordinatePoint) return;
 
+
+
     //contemplar el caso de marker.typeGeometry === LineString
     const startMarker = new Feature({
       type: 'point',
@@ -203,7 +222,7 @@ export class MapComponent implements OnInit, OnChanges {
     }))
 
     this.vectorSource.addFeature(startMarker);
-    //console.log('Marcadores:', this.markers);
+    // console.log('Marcadores:', marker);
   }
 
   private addLineString = (lineString: Dibujo): void => {
@@ -231,7 +250,7 @@ export class MapComponent implements OnInit, OnChanges {
     //contemplar el caso de marker.typeGeometry === LineString
     const polygonDraw = new Feature({
       type: 'polygon',
-      geometry: new Polygon (polygon.coordinates.coordinatePolygon),
+      geometry: new Polygon(polygon.coordinates.coordinatePolygon),
       id: polygon.id
     });
 
@@ -350,7 +369,7 @@ export class MapComponent implements OnInit, OnChanges {
         this.addLineString(dibujo);
       }
 
-      if(dibujo.typeGeometry === "Polygon"){
+      if (dibujo.typeGeometry === "Polygon") {
         this.addPolygon(dibujo)
       }
     })
@@ -358,17 +377,17 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
 
-  downloadGeoJSON(){
+  downloadGeoJSON() {
 
-  const geoJSONGenerado= new GeoJSON().writeFeatures(this.vectorSource.getFeatures())
+    const geoJSONGenerado = new GeoJSON().writeFeatures(this.vectorSource.getFeatures())
 
-const newBlob = new Blob([geoJSONGenerado], { type: "text/json" });
-const data = window.URL.createObjectURL(newBlob);
-const link = document.createElement("a");
-link.href = data;
-link.download = "BitacoraMap.geojson"; // set a name for the file
-link.click();
-  console.log(geoJSONGenerado);
+    const newBlob = new Blob([geoJSONGenerado], { type: "text/json" });
+    const data = window.URL.createObjectURL(newBlob);
+    const link = document.createElement("a");
+    link.href = data;
+    link.download = "BitacoraMap.geojson"; // set a name for the file
+    link.click();
+    console.log(geoJSONGenerado);
   }
 
 }
