@@ -364,7 +364,7 @@ export class MapComponent implements OnInit, OnChanges {
 
       */
 
-      console.log(dibujo)
+      console.log(dibujo.description)
       if (dibujo.typeGeometry === "Point") {
         this.addMarker(dibujo);
       }
