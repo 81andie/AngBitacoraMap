@@ -12,7 +12,7 @@ export class MarkersService {
   public marcadorBorrador: Dibujo= {id : 0};
 
   private marcadorBorradorSubject = new Subject<Dibujo>();
-  private markersSubject = new Subject<Dibujo[]>();
+  private dibujosSubject = new Subject<Dibujo[]>();
 
   constructor() { }
 
@@ -54,13 +54,15 @@ patata(objecte: interficie)
 
   obtenerMarkers(): Dibujo[] {
     return JSON.parse(localStorage.getItem('markers') || "[]");
-
   }
 
   guardarMarkers(markers:Dibujo[]):void{
 
+    //se guarda en el localstorage
     localStorage.setItem('markers', JSON.stringify(markers));
-    this.markersSubject.next(markers);
+
+    //actualitza el subject para que los observers se enteren del cambio
+    this.dibujosSubject.next(markers);
 
   }
 
@@ -68,8 +70,8 @@ patata(objecte: interficie)
     return this.marcadorBorradorSubject.asObservable();
   }
 
-  obtenerSubscripcionMarkers() {
-    return this.markersSubject.asObservable(); // Observable para los cambios en la lista de marcadores
+  obtenerSubscripcionDibujos() {
+    return this.dibujosSubject.asObservable(); // Observable para los cambios en la lista de marcadores
   }
 
 

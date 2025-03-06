@@ -16,6 +16,7 @@ import { Dibujo } from '../../interfaces/dibujo.interface';
 import { MarkersService } from '../../services/markers.service';
 import { noModifierKeys, primaryAction } from 'ol/events/condition';
 import { Coordinates } from '../../interfaces/coordinates.interface';
+import { Subscription } from 'rxjs';
 
 
 
@@ -126,6 +127,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   public activeTool: string | null = null;
+  private dibujoSubscription!: Subscription;
 
   private drawInteraction: any = null;
 
@@ -189,7 +191,27 @@ export class MapComponent implements OnInit, OnChanges {
 
     this.recoverMarkers()
 
+    this.dibujoSubscription = this.MarkersService
+    .obtenerSubscripcionDibujos()
+    .subscribe((dibujosActualizados) => {
+      //recuperar las features
+      let features = this.vectorSource.getFeatures()
+      //por cada feature, actualizar la description
 
+      dibujosActualizados.forEach((dibujoActualizado:Dibujo)=>{
+        this.actualizarDescripcionDeFeature(features, dibujoActualizado)
+
+      })
+    });
+  }
+
+  private actualizarDescripcionDeFeature = (features: Feature[], dibujoActualizado: Dibujo): void => {
+    features.forEach((feature: Feature)=>{
+      let featureId = feature.getProperties()["id"];
+      if(featureId === dibujoActualizado.id){
+         feature.set("description", dibujoActualizado.description)
+      }
+    })
   }
 
 

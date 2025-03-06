@@ -29,21 +29,20 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.markersSubscription = this.MarkersService
+    .obtenerSubscripcionDibujos()
+    .subscribe((dibujosActualizados) => {
+      //solo se ejecuta cuando algo /alguien guarda algo en el localstorage
+      this.marcadores = dibujosActualizados;
+    });
+
     this.getMarkers();
   }
 
 
   getMarkers() {
-
     this.marcadores = this.MarkersService.obtenerMarkers();
-    this.markersSubscription = this.MarkersService
-      .obtenerSubscripcionMarkers()
-      .subscribe((marcador) => {
-        this.marcadores = marcador;
-      });
-
     this.isSidebarVisible = true
-
   }
 
 

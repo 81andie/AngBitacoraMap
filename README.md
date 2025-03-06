@@ -26,7 +26,7 @@ Funcionalidad 1- Descargar un geojson que contenga los dibujos del mapa
 
 Para que sirve - Te serviria para compartirlo con otra gente o para volver a cargarlos mas tarde
 
-Falta añadir description cuando recuperamos los markers en recoverMarkers, que proviene del localStorage
+
 
 
 tarea 12
