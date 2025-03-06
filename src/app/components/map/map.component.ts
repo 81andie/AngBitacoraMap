@@ -208,7 +208,8 @@ export class MapComponent implements OnInit, OnChanges {
     const startMarker = new Feature({
       type: 'point',
       geometry: new Point(marker.coordinates.coordinatePoint),
-      id: marker.id
+      id: marker.id,
+      description: marker.description
     });
 
     //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
@@ -233,7 +234,8 @@ export class MapComponent implements OnInit, OnChanges {
     const line = new Feature({
       type: 'lineString',
       geometry: new LineString(lineString.coordinates.coordinateLineString),
-      id: lineString.id
+      id: lineString.id,
+      description: lineString.description
     });
 
     //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
@@ -251,7 +253,8 @@ export class MapComponent implements OnInit, OnChanges {
     const polygonDraw = new Feature({
       type: 'polygon',
       geometry: new Polygon(polygon.coordinates.coordinatePolygon),
-      id: polygon.id
+      id: polygon.id,
+      description: polygon.description
     });
 
     //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
