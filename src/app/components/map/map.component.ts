@@ -105,7 +105,7 @@ export class MapComponent implements OnInit, OnChanges {
 
     }
 
-    
+
   }
 
 
@@ -405,6 +405,11 @@ export class MapComponent implements OnInit, OnChanges {
     link.download = "BitacoraMap.geojson"; // set a name for the file
     link.click();
     console.log(geoJSONGenerado);
+  }
+
+
+  upLoadGeoJSON(event: Event){
+    console.log(event)
   }
 
 }

@@ -18,6 +18,16 @@
       </svg>Polygon
   </button>
 
-  <button type="submit" (click)="downloadGeoJSON()" class="p-1 rounded-3 btn btn-light"><i class="fa-solid fa-file-arrow-up text-danger fs-4"></i>Descargar GeoJSON</button>
-  </div>
+  <button type="submit" (click)="downloadGeoJSON()" class="p-1 rounded-3 btn btn-light"><i class="fa-solid fa-file-arrow-down text-danger fs-4"></i>Descargar GeoJSON</button>
+
+<label class="p-1 rounded-3 btn btn-light">
+
+  <input type="file"  id="file" (change)="upLoadGeoJSON($event)" class="p-1 rounded-3 btn btn-light"/>
+  <i class="fa-solid fa-file-arrow-up text-danger fs-4"></i>
+  Subir GeoJSON
+</label>
+
+
+
+</div>
 
