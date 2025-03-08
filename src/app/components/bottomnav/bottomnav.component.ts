@@ -12,7 +12,7 @@ export class BottomnavComponent {
   public isBottomNavVisible: boolean = false;
   public dibujo: Dibujo = {id:0};
   @Output() public closeEventEmitter= new EventEmitter<Dibujo>();
-  @Output() public updateDescriptionEventEmitter= new EventEmitter<Dibujo>();
+
 
   constructor(private MarkersService: MarkersService){
 
@@ -24,7 +24,7 @@ export class BottomnavComponent {
   }
 
   save() {
-    this.updateDescriptionEventEmitter.emit(this.dibujo)
+   
     this.isBottomNavVisible= false;
     this.MarkersService.guardarMarcador(this.dibujo)
   }

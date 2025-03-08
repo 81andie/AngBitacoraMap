@@ -102,28 +102,16 @@ export class MapComponent implements OnInit, OnChanges {
           this.vectorSource.removeFeature(feature);
         }
       })
-    } else if (changes['updateDescription'] && this.map) {
-      let dibujo = changes['updateDescription'].currentValue;
-      let features = this.vectorSource.getFeatures();
 
-      features.forEach((feature: Feature) => {
-        let featureId = feature.getProperties()["id"];
-        if (featureId === dibujo.id) {
-          //agafar description del dibujo
-          let description= dibujo.description;
-
-          //posar description dintre la feature
-          feature.set("description", description)
-
-        }
-      })
     }
+
+    
   }
 
 
   @Input() public temporaryMarkerToRemove: Dibujo = { id: 0 };
   @Input() public dibujoACentrar: Dibujo = { id: 0 };
-  @Input() public updateDescription: Dibujo = { id: 0 };
+
 
 
   public activeTool: string | null = null;
