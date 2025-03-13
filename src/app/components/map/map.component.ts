@@ -410,6 +410,21 @@ export class MapComponent implements OnInit, OnChanges {
 
   upLoadGeoJSON(event: Event){
     console.log(event)
+    //Objeto FileReader
+    let fileReader = new FileReader();
+
+    //Nos quedamos esperando que se ejecute el "load" del fichero.
+    fileReader.onload = (e) => {
+      console.log(fileReader.result);//se ejecuta cuando se ha hecho "load"
+    }
+
+    if(event.target){
+      let target = (event.target as HTMLInputElement)
+      if(target.files){
+        fileReader.readAsText(target.files[0])// aqui es donde le dices: este es el archivo a leer.
+      }
+    }
+
   }
 
 }
