@@ -8,8 +8,6 @@ poder importar en Geojson.
 
 
 
-
-Limpiar el VectorSouce
 una vez hecho que este en una variable tipo string, importarlo en el vectorSource
 guardar en el Markers Service
 

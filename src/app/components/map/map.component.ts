@@ -409,14 +409,19 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   upLoadGeoJSON(event: Event){
-    console.log(event)
+
+    let contingut = "";
+
     //Objeto FileReader
     let fileReader = new FileReader();
 
     //Nos quedamos esperando que se ejecute el "load" del fichero.
+    //Se ejecutará esta funcion.
     fileReader.onload = (e) => {
-      console.log(fileReader.result);//se ejecuta cuando se ha hecho "load"
+      contingut = (fileReader.result as string)//se ejecuta cuando se ha hecho "load"
+      this.procesarFicheroJson(contingut)
     }
+
 
     if(event.target){
       let target = (event.target as HTMLInputElement)
@@ -427,4 +432,9 @@ export class MapComponent implements OnInit, OnChanges {
 
   }
 
+  procesarFicheroJson (archivo: string){
+    this.vectorSource.clear();
+    console.log(this.vectorSource.features)
+
+  }
 }
