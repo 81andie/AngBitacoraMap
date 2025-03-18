@@ -420,6 +420,7 @@ export class MapComponent implements OnInit, OnChanges {
     fileReader.onload = (e) => {
       contingut = (fileReader.result as string)//se ejecuta cuando se ha hecho "load"
       this.procesarFicheroJson(contingut)
+
     }
 
 
@@ -436,5 +437,38 @@ export class MapComponent implements OnInit, OnChanges {
     this.vectorSource.clear();
     console.log(this.vectorSource.features)
 
+    const featuresImportadas =  new GeoJSON().readFeatures(archivo)
+    this.vectorSource.addFeatures(featuresImportadas)
+  }
+
+  transformarFeatureADibujo(feature:Feature){
+
+
+    let geometry = feature.getGeometry();
+
+    let coordinates: Coordinates = {};
+
+    if (geometry instanceof Point) {
+      coordinates.coordinatePoint = geometry.getCoordinates()
+    }
+
+    if (geometry instanceof LineString) {
+      coordinates.coordinateLineString = geometry.getCoordinates()
+    }
+
+    if (geometry instanceof Polygon) {
+      coordinates.coordinatePolygon = geometry.getCoordinates()
+    }
+    //
+    const dibujo : Dibujo = {
+      id: feature.getProperties()["id"],
+      coordinates:{
+        coordinatePoint: [0,0]
+      },
+      typeGeometry: "point",
+      description: feature.getProperties()["description"],
+    };
+
+    return dibujo;
   }
 }
