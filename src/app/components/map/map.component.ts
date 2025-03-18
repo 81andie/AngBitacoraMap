@@ -438,7 +438,8 @@ export class MapComponent implements OnInit, OnChanges {
     console.log(this.vectorSource.features)
 
     const featuresImportadas =  new GeoJSON().readFeatures(archivo)
-    this.vectorSource.addFeatures(featuresImportadas)
+    this.vectorSource.addFeatures(featuresImportadas);
+
   }
 
   transformarFeatureADibujo(feature:Feature){
