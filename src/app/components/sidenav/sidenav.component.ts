@@ -1,6 +1,6 @@
 import { Dibujo } from '../../interfaces/dibujo.interface';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { MarkersService } from '../../services/markers.service';
+import { DibujosService } from '../../services/markers.service';
 import { Subscription } from 'rxjs';
 
 
@@ -25,7 +25,7 @@ export class SidenavComponent implements OnInit {
   @Output() public centerMapToCoordinateEmitter = new EventEmitter<Dibujo>();
   @Output() public removeMapMarker = new EventEmitter<Dibujo>();
 
-  constructor(private MarkersService: MarkersService) { }
+  constructor(private MarkersService: DibujosService) { }
 
   ngOnInit(): void {
 
@@ -41,7 +41,7 @@ export class SidenavComponent implements OnInit {
 
 
   getMarkers() {
-    this.marcadores = this.MarkersService.obtenerMarkers();
+    this.marcadores = this.MarkersService.obtenerDibujos();
     this.isSidebarVisible = true
   }
 
@@ -57,7 +57,7 @@ export class SidenavComponent implements OnInit {
 
   deleteMarker(markerToRemove: Dibujo) {
     console.log("delete")
-    let storageMarkers = this.MarkersService.obtenerMarkers();
+    let storageMarkers = this.MarkersService.obtenerDibujos();
     //fem veure que storageMarkers té 5 markers
     let indexMarkerDelete = -1;
     storageMarkers.forEach((marker, index) => {
@@ -70,7 +70,7 @@ export class SidenavComponent implements OnInit {
 
 
     storageMarkers.splice(indexMarkerDelete, 1)
-    this.MarkersService.guardarMarkers(storageMarkers)
+    this.MarkersService.guardarDibujos(storageMarkers)
     this.removeMapMarker.emit(markerToRemove)
 
   }
@@ -93,7 +93,7 @@ export class SidenavComponent implements OnInit {
 
     markerToSave.isEditMode = false;
 
-    this.MarkersService.guardarMarkers(this.marcadores)
+    this.MarkersService.guardarDibujos(this.marcadores)
 
   }
 

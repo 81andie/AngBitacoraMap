@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { MarkersService } from '../../services/markers.service';
+import { DibujosService } from '../../services/markers.service';
 import { Dibujo } from '../../interfaces/dibujo.interface';
 
 @Component({
@@ -14,9 +14,9 @@ export class BottomnavComponent {
   @Output() public closeEventEmitter= new EventEmitter<Dibujo>();
 
 
-  constructor(private MarkersService: MarkersService){
+  constructor(private MarkersService: DibujosService){
 
-    this.MarkersService.obtenerSubscripcionMarcador().subscribe((marcador:Dibujo)=>{
+    this.MarkersService.obtenerSubscripcionDibujoBorrador().subscribe((marcador:Dibujo)=>{
       this.dibujo= marcador;
       console.log(this.dibujo)
       this.isBottomNavVisible = true;
@@ -24,9 +24,9 @@ export class BottomnavComponent {
   }
 
   save() {
-   
+
     this.isBottomNavVisible= false;
-    this.MarkersService.guardarMarcador(this.dibujo)
+    this.MarkersService.guardarDibujo(this.dibujo)
   }
   close(){
     this.isBottomNavVisible= false;

@@ -13,7 +13,7 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON.js';
 import { Dibujo } from '../../interfaces/dibujo.interface';
-import { MarkersService } from '../../services/markers.service';
+import { DibujosService } from '../../services/markers.service';
 import { noModifierKeys, primaryAction } from 'ol/events/condition';
 import { Coordinates } from '../../interfaces/coordinates.interface';
 import { Subscription } from 'rxjs';
@@ -29,7 +29,7 @@ import { Subscription } from 'rxjs';
 
 export class MapComponent implements OnInit, OnChanges {
 
-  constructor(private MarkersService: MarkersService) { }
+  constructor(private MarkersService: DibujosService) { }
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -303,7 +303,7 @@ export class MapComponent implements OnInit, OnChanges {
         //console.log(featureModified.getProperties()["id"]);
         let idModified = featureModified.getProperties()["id"];
 
-        let markers = this.MarkersService.obtenerMarkers();
+        let markers = this.MarkersService.obtenerDibujos();
 
         markers.forEach(dibujo => {
 
@@ -315,7 +315,7 @@ export class MapComponent implements OnInit, OnChanges {
 
         })
 
-        this.MarkersService.guardarMarkers(markers)
+        this.MarkersService.guardarDibujos(markers)
 
 
       });
@@ -366,7 +366,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   recoverMarkers(): void {
-    const markersRecuperados = this.MarkersService.obtenerMarkers();
+    const markersRecuperados = this.MarkersService.obtenerDibujos();
     console.log(markersRecuperados);
     markersRecuperados.forEach((dibujo: Dibujo) => {
       /*
@@ -444,7 +444,7 @@ export class MapComponent implements OnInit, OnChanges {
     return this.transformarFeatureADibujo(feature)
     })
 
-    this.MarkersService.guardarMarkers(dibujos)
+    this.MarkersService.guardarDibujos(dibujos)
 
 
   }
