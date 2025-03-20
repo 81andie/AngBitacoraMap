@@ -440,6 +440,13 @@ export class MapComponent implements OnInit, OnChanges {
     const featuresImportadas =  new GeoJSON().readFeatures(archivo)
     this.vectorSource.addFeatures(featuresImportadas);
 
+    let dibujos = featuresImportadas.map((feature)=>{
+    return this.transformarFeatureADibujo(feature)
+    })
+
+    this.MarkersService.guardarMarkers(dibujos)
+
+
   }
 
   transformarFeatureADibujo(feature:Feature){
@@ -448,25 +455,29 @@ export class MapComponent implements OnInit, OnChanges {
     let geometry = feature.getGeometry();
 
     let coordinates: Coordinates = {};
+    let typeGeometry : "Point" | "LineString" | "Polygon" | "" = ""
+    // typeGeometry se infiere que es de tipo string.
+    // typeGeometry debe contener 1 de las 3 palabras siguientes: Point, LineString, Polygon
 
     if (geometry instanceof Point) {
       coordinates.coordinatePoint = geometry.getCoordinates()
+      typeGeometry = "Point"
     }
 
     if (geometry instanceof LineString) {
       coordinates.coordinateLineString = geometry.getCoordinates()
+       typeGeometry = "LineString"
     }
 
     if (geometry instanceof Polygon) {
       coordinates.coordinatePolygon = geometry.getCoordinates()
+      typeGeometry = "Polygon"
     }
     //
     const dibujo : Dibujo = {
       id: feature.getProperties()["id"],
-      coordinates:{
-        coordinatePoint: [0,0]
-      },
-      typeGeometry: "point",
+      coordinates: coordinates,
+      typeGeometry: typeGeometry,
       description: feature.getProperties()["description"],
     };
 
