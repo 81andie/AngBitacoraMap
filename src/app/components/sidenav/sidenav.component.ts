@@ -1,6 +1,6 @@
 import { Dibujo } from '../../interfaces/dibujo.interface';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DibujosService } from '../../services/markers.service';
+import { DibujosService } from '../../services/dibujos.service';
 import { Subscription } from 'rxjs';
 
 

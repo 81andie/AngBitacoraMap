@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { DibujosService } from '../../services/markers.service';
+import { DibujosService } from '../../services/dibujos.service';
 import { Dibujo } from '../../interfaces/dibujo.interface';
 
 @Component({

@@ -13,7 +13,7 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON.js';
 import { Dibujo } from '../../interfaces/dibujo.interface';
-import { DibujosService } from '../../services/markers.service';
+import { DibujosService } from '../../services/dibujos.service';
 import { noModifierKeys, primaryAction } from 'ol/events/condition';
 import { Coordinates } from '../../interfaces/coordinates.interface';
 import { Subscription } from 'rxjs';
