@@ -1,0 +1,18 @@
+.container_logo{
+  width: 90px;
+  height: 90px;
+  background-color: rgba(237, 82, 82, 0.817);
+  z-index: 1;
+  position:absolute;
+  top:20px;
+  right:0;
+  padding:3px;
+  margin-right: 3px;
+  border-radius: 15px;
+}
+
+.logo{
+  position: relative;
+  width: 90px;
+  height: 90px;
+}
