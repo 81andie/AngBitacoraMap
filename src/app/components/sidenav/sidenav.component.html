@@ -32,24 +32,23 @@
     <p class="text-dark mt-6 fs-5 fw-bold">Aqui tens els llocs guardats</p>
 
     <div class="form-floating text-dark" >
-
-      <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let marker of filterDibujos()">
-        <div class="" *ngIf="marker.isEditMode">
+      <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let dibujo of filterDibujos()">
+        <div class="" *ngIf="dibujo.isEditMode">
 
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username with two button addons"
-            [(ngModel)]="marker.description">
-            <button class="btn btn-outline-success" type="button" (click)="saveToLocal(marker)">Guardar</button>
-            <button class="btn btn-outline-danger" type="button" (click)="cancelEdit(marker)">Cancelar</button>
+            [(ngModel)]="dibujo.description">
+            <button class="btn btn-outline-success" type="button" (click)="saveToLocal(dibujo)">Guardar</button>
+            <button class="btn btn-outline-danger" type="button" (click)="cancelEdit(dibujo)">Cancelar</button>
           </div>
         </div>
-        <div *ngIf="!marker.isEditMode">
+        <div *ngIf="!dibujo.isEditMode">
           <div class="d-flex justify-content-between  ">
-            <span class="list-item text-dark bg-light p-1 rounded-pill fs-3">{{marker.description}} </span>
+            <span class="list-item text-dark bg-light p-1 rounded-pill fs-3">{{dibujo.description}} </span>
 
            <div class="d-flex gap-1">
-            <button (click)="editDescription(marker)" class="btn btn-outline-success "><i class="fa-regular fa-pen-to-square"></i></button>
-            <button (click)="deleteDibujo(marker)" class="btn btn-outline-danger" ><i class="fa-solid fa-trash-can"></i></button>
+            <button (click)="editDescription(dibujo)" class="btn btn-outline-success "><i class="fa-regular fa-pen-to-square"></i></button>
+            <button (click)="deleteDibujo(dibujo)" class="btn btn-outline-danger" ><i class="fa-solid fa-trash-can"></i></button>
            </div>
 
           </div>
@@ -57,7 +56,7 @@
         </div>
 
         <hr class="text-dark">
-        <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1" (click)="centerMapToCoordinate(marker)">Centrar en el mapa</span>
+        <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1" (click)="centerMapToCoordinate(dibujo)">Centrar en el mapa</span>
 
       </div>
       <!-- <textarea class="form-control text-dark h-25 " placeholder="Escriu..." id="floatingTextarea"></textarea>

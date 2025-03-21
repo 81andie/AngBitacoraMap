@@ -17,10 +17,16 @@
   right: 0;
   top:50vh;
   z-index: 0;
+
 }
 
 
 input[type="file"] {
   display: none;
 }
+
+.container_btn_dibujo .btn {
+  font-size: 12px; /* Ajusta según necesidad */
+}
+
 
