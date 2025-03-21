@@ -29,7 +29,7 @@
 
 
     >
-    <p class="text-dark mt-6 fs-4 fw-bold">Aqui tens els llocs guardats</p>
+    <p class="text-dark mt-6 fs-4 fw-bold">Here are the saved places</p>
 
     <div class="form-floating text-dark" >
       <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let dibujo of filterDibujos()">
@@ -38,8 +38,8 @@
           <div class="input-group">
             <input type="text" class="form-control" placeholder="" aria-label=""
             [(ngModel)]="dibujo.description">
-            <button class="btn btn-outline-success" type="button" (click)="saveToLocal(dibujo)">Guardar</button>
-            <button class="btn btn-outline-danger" type="button" (click)="cancelEdit(dibujo)">Cancelar</button>
+            <button class="btn btn-outline-success" type="button" (click)="saveToLocal(dibujo)">Save</button>
+            <button class="btn btn-outline-danger" type="button" (click)="cancelEdit(dibujo)">Cancel</button>
           </div>
         </div>
         <div *ngIf="!dibujo.isEditMode">
@@ -56,7 +56,7 @@
         </div>
 
         <hr class="text-dark">
-        <span class="bg-primary  text-light fw-light fs-6 rounded-pill mt-4 ms-1 p-1" (click)="centerMapToCoordinate(dibujo)">Centrar en el mapa</span>
+        <button class="btn btn-outline-primary p-2  mt-4  p-2" (click)="centerMapToCoordinate(dibujo)"><i class="fa-solid fa-map-location-dot"></i></button>
 
       </div>
       <!-- <textarea class="form-control text-dark h-25 " placeholder="Escriu..." id="floatingTextarea"></textarea>

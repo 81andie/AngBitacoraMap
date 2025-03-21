@@ -18,6 +18,7 @@
   top:38vh;
   z-index: 0;
 
+
 }
 
 
@@ -27,6 +28,10 @@ input[type="file"] {
 
 .container_btn_dibujo .btn {
   font-size: 13px; /* Ajusta según necesidad */
+}
+
+.btn-light{
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.15), -4px -4px 20px rgba(0, 0, 0, 0.05);
 }
 
 

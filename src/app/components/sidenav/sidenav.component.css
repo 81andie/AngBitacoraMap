@@ -1,3 +1,4 @@
+
 .container_btn_dibujo{
   width: 90px;
   height: 50px;
@@ -28,8 +29,10 @@
 }
 
 .btn-outline-success,
-.btn-outline-danger{
+.btn-outline-danger,
+.btn-outline-primary{
   height: 40px;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.15), -4px -4px 20px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -43,9 +46,8 @@
   width: 100%;
   top: 0;
 }
-
-
 }
+
 @media (min-width:481px) {
   .parrafo{
     width: 100%;
