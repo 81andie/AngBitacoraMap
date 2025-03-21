@@ -29,7 +29,7 @@ import { Subscription } from 'rxjs';
 
 export class MapComponent implements OnInit, OnChanges {
 
-  constructor(private MarkersService: DibujosService) { }
+  constructor(private DibujosService: DibujosService) { }
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -109,7 +109,7 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
 
-  @Input() public temporaryMarkerToRemove: Dibujo = { id: 0 };
+  @Input() public temporaryDibujoToRemove: Dibujo = { id: 0 };
   @Input() public dibujoACentrar: Dibujo = { id: 0 };
 
 
@@ -177,9 +177,9 @@ export class MapComponent implements OnInit, OnChanges {
 
     console.log(this.map)
 
-    this.recoverMarkers()
+    this.recoverDibujos()
 
-    this.dibujoSubscription = this.MarkersService
+    this.dibujoSubscription = this.DibujosService
     .obtenerSubscripcionDibujos()
     .subscribe((dibujosActualizados) => {
       //recuperar las features
@@ -208,23 +208,23 @@ export class MapComponent implements OnInit, OnChanges {
   //if(A !== undefined)
   //A: number[]
 
-  private addMarker = (marker: Dibujo): void => {
+  private addDibujo = (dibujo: Dibujo): void => {
 
-    if (!marker.coordinates?.coordinatePoint) return;
+    if (!dibujo.coordinates?.coordinatePoint) return;
 
 
 
     //contemplar el caso de marker.typeGeometry === LineString
-    const startMarker = new Feature({
+    const startDibujo = new Feature({
       type: 'point',
-      geometry: new Point(marker.coordinates.coordinatePoint),
-      id: marker.id,
-      description: marker.description
+      geometry: new Point(dibujo.coordinates.coordinatePoint),
+      id: dibujo.id,
+      description: dibujo.description
     });
 
     //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
 
-    startMarker.setStyle(new Style({
+    startDibujo.setStyle(new Style({
       image: new Icon({
         anchor: [0.6, 0.5],
         src: './assets/marker.png',
@@ -232,15 +232,15 @@ export class MapComponent implements OnInit, OnChanges {
       })
     }))
 
-    this.vectorSource.addFeature(startMarker);
-    // console.log('Marcadores:', marker);
+    this.vectorSource.addFeature(startDibujo);
+
   }
 
   private addLineString = (lineString: Dibujo): void => {
 
     if (!lineString.coordinates?.coordinateLineString) return;
 
-    //contemplar el caso de marker.typeGeometry === LineString
+
     const line = new Feature({
       type: 'lineString',
       geometry: new LineString(lineString.coordinates.coordinateLineString),
@@ -303,9 +303,9 @@ export class MapComponent implements OnInit, OnChanges {
         //console.log(featureModified.getProperties()["id"]);
         let idModified = featureModified.getProperties()["id"];
 
-        let markers = this.MarkersService.obtenerDibujos();
+        let dibujos = this.DibujosService.obtenerDibujos();
 
-        markers.forEach(dibujo => {
+        dibujos.forEach(dibujo => {
 
           if (dibujo.id === idModified) {
             dibujo.coordinates = coordinates;
@@ -315,7 +315,7 @@ export class MapComponent implements OnInit, OnChanges {
 
         })
 
-        this.MarkersService.guardarDibujos(markers)
+        this.DibujosService.guardarDibujos(dibujos)
 
 
       });
@@ -337,7 +337,7 @@ export class MapComponent implements OnInit, OnChanges {
       console.log(evt)
       let drawnFeature = evt.feature
 
-      let id = this.MarkersService.generateUniqueId();
+      let id = this.DibujosService.generateUniqueId();
       drawnFeature.set("id", id);
 
       let geometry = drawnFeature.getGeometry();
@@ -356,7 +356,7 @@ export class MapComponent implements OnInit, OnChanges {
         coordinates.coordinatePolygon = geometry.getCoordinates()
       }
 
-      this.MarkersService.inicializar(id, coordinates, typeDraw);
+      this.DibujosService.inicializar(id, coordinates, typeDraw);
 
     })
     this.map.addInteraction(this.drawInteraction);
@@ -365,10 +365,10 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-  recoverMarkers(): void {
-    const markersRecuperados = this.MarkersService.obtenerDibujos();
-    console.log(markersRecuperados);
-    markersRecuperados.forEach((dibujo: Dibujo) => {
+  recoverDibujos(): void {
+    const dibujosRecuperados = this.DibujosService.obtenerDibujos();
+    console.log(dibujosRecuperados);
+    dibujosRecuperados.forEach((dibujo: Dibujo) => {
       /*
       ++ codigo mas corto, mas claro, separado por funcionalidad
       > cuidado de no replicar codigo: si hay cosas comunes, reutilitzarles
@@ -379,7 +379,7 @@ export class MapComponent implements OnInit, OnChanges {
 
       console.log(dibujo.description)
       if (dibujo.typeGeometry === "Point") {
-        this.addMarker(dibujo);
+        this.addDibujo(dibujo);
       }
 
       if (dibujo.typeGeometry === "LineString") {
@@ -444,7 +444,7 @@ export class MapComponent implements OnInit, OnChanges {
     return this.transformarFeatureADibujo(feature)
     })
 
-    this.MarkersService.guardarDibujos(dibujos)
+    this.DibujosService.guardarDibujos(dibujos)
 
 
   }
