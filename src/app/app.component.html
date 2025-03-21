@@ -1,24 +1,8 @@
-
-
 <app-header></app-header>
-
-
-<app-map [temporaryDibujoToRemove]="temporaryDibujoToRemove"
-         [dibujoACentrar] = "dibujoACentrar"
-
-
-></app-map>
+<app-map [temporaryDibujoToRemove]="temporaryDibujoToRemove" [dibujoACentrar]="dibujoACentrar"></app-map>
 
 <router-outlet>
-  <app-sidenav
-  (centerMapToCoordinateEmitter)="changeCenterOfMapHandler($event)"
-  (removeMapDibujo)="closeHandler($event)"
-
-
-  ></app-sidenav>
-  <app-bottomnav (closeEventEmitter)="closeHandler($event)"
-
-  ></app-bottomnav>
-
-
+  <app-sidenav (centerMapToCoordinateEmitter)="changeCenterOfMapHandler($event)"
+    (removeMapDibujo)="closeHandler($event)"></app-sidenav>
+  <app-bottomnav (closeEventEmitter)="closeHandler($event)"></app-bottomnav>
 </router-outlet>

@@ -1,24 +1,16 @@
 <div class="background" [hidden]="!isBottomNavVisible"></div>
 
-<div [hidden]="!isBottomNavVisible" class="mb-2 container-md w-100 w-xs-100  container-nav position-absolute bottom-0 start-50 translate-middle-x"  >
+<div [hidden]="!isBottomNavVisible"
+  class="mb-2 container-md w-100 w-xs-100  container-nav position-absolute bottom-0 start-50 translate-middle-x">
   <label class="text-xxl-end mt-2">Escriu on vols anar i guarda...</label>
+
   <div class="container-nav-inputs  p-1 ">
-
     <div class="input-group mb-3">
-
-      <input type="text"
-      [(ngModel)]="dibujo.description"
-      class="form-control "
-      placeholder="Vull anar a la Sagrada Família..."
-      />
-
+      <input type="text" [(ngModel)]="dibujo.description" class="form-control "
+        placeholder="Vull anar a la Sagrada Família..." />
       <button class="button button-save" (click)="save()"><i class="fa-regular fa-floppy-disk"></i></button>
       <button class="button button-close" (click)="close()"><i class="fa-solid fa-xmark"></i></button>
-
-
     </div>
-
-
+    
   </div>
-
 </div>

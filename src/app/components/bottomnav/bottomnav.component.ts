@@ -14,10 +14,10 @@ export class BottomnavComponent {
   @Output() public closeEventEmitter= new EventEmitter<Dibujo>();
 
 
-  constructor(private MarkersService: DibujosService){
+  constructor(private DibujosService: DibujosService){
 
-    this.MarkersService.obtenerSubscripcionDibujoBorrador().subscribe((marcador:Dibujo)=>{
-      this.dibujo= marcador;
+    this.DibujosService.obtenerSubscripcionDibujoBorrador().subscribe((dibujo:Dibujo)=>{
+      this.dibujo= dibujo;
       console.log(this.dibujo)
       this.isBottomNavVisible = true;
     })
@@ -26,7 +26,7 @@ export class BottomnavComponent {
   save() {
 
     this.isBottomNavVisible= false;
-    this.MarkersService.guardarDibujo(this.dibujo)
+    this.DibujosService.guardarDibujo(this.dibujo)
   }
   close(){
     this.isBottomNavVisible= false;

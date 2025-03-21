@@ -19,7 +19,6 @@ import { Coordinates } from '../../interfaces/coordinates.interface';
 import { Subscription } from 'rxjs';
 
 
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -30,45 +29,13 @@ import { Subscription } from 'rxjs';
 export class MapComponent implements OnInit, OnChanges {
 
   constructor(private DibujosService: DibujosService) { }
-
-
   ngOnChanges(changes: SimpleChanges): void {
-    /*
-    la variable changes puede contener o bien  temporaryMarkerToRemove o bien
-    newCenter
-
-    si viene newCenter, printar por consola "hola"
-
-
-    si viene el otro, printar por consola "adios"
-
-    y otra diferente si viene temporaryMarkerToRemove
-
+    /*la variable changes puede contener o bien  temporaryMarkerToRemove o bien
+   dibujoACentrar
     */
-
     if (changes['dibujoACentrar'] && this.map) {
-      console.log(changes['dibujoACentrar'])
+
       let dibujo = changes['dibujoACentrar'].currentValue
-
-      //opcio 2
-      //fit(geometry)
-      //cal creare la geometry des d'un dibujo
-
-
-      /*
-      changes? -> changes['newCenter']
-      changes -> changes['dibujo']!!!!!!
-      */
-
-      //dibujo?
-
-      //new Point(dibujo.coordinates.coordinatePoint)
-
-
-      //new LineString(dibujo.coordinates.coordinateLineString)
-
-      //const geometry = Hem de fer codi per assignar geometria
-
       let geometry;
 
       if (dibujo.typeGeometry === "Point") {
@@ -83,17 +50,13 @@ export class MapComponent implements OnInit, OnChanges {
         geometry = new Polygon(dibujo.coordinates.coordinatePolygon)
       }
 
-
-
       if (geometry) {
         this.map.getView().fit(geometry, { maxZoom: 18, padding: [120, 120, 120, 120] })
       }
 
+    } else if (changes['temporaryDibujoToRemove'] && this.map) {
 
-      //  this.map.getView().fit()
-    } else if (changes['temporaryMarkerToRemove'] && this.map) {
-
-      let dibujo = changes['temporaryMarkerToRemove'].currentValue;
+      let dibujo = changes['temporaryDibujoToRemove'].currentValue;
       let features = this.vectorSource.getFeatures()
 
       features.forEach((feature: Feature) => {
@@ -102,21 +65,15 @@ export class MapComponent implements OnInit, OnChanges {
           this.vectorSource.removeFeature(feature);
         }
       })
-
     }
-
-
   }
 
 
   @Input() public temporaryDibujoToRemove: Dibujo = { id: 0 };
   @Input() public dibujoACentrar: Dibujo = { id: 0 };
 
-
-
   public activeTool: string | null = null;
   private dibujoSubscription!: Subscription;
-
   private drawInteraction: any = null;
 
   private vectorSource: any = new VectorSource({
@@ -135,20 +92,11 @@ export class MapComponent implements OnInit, OnChanges {
       'icon-src': './assets/marker.png',
       'icon-anchor': [0.6, 0.5],
       'icon-scale': 0.3
-
     }
 
   });
 
   private map: Map | null = null;
-  /*
-
-   private map: Map | null = null;
-   private map2: Map | null = map
-
-  private variable_name : type_variable
-  */
-
 
   ngOnInit(): void {
     this.map = new Map({
@@ -165,9 +113,6 @@ export class MapComponent implements OnInit, OnChanges {
     });
 
 
-
-
-
     const snap = new Snap({ source: this.vectorSource });
     this.map.addInteraction(snap);
 
@@ -180,39 +125,33 @@ export class MapComponent implements OnInit, OnChanges {
     this.recoverDibujos()
 
     this.dibujoSubscription = this.DibujosService
-    .obtenerSubscripcionDibujos()
-    .subscribe((dibujosActualizados) => {
-      //recuperar las features
-      let features = this.vectorSource.getFeatures()
-      //por cada feature, actualizar la description
+      .obtenerSubscripcionDibujos()
+      .subscribe((dibujosActualizados) => {
+        //recuperar las features
+        let features = this.vectorSource.getFeatures()
+        //por cada feature, actualizar la description
 
-      dibujosActualizados.forEach((dibujoActualizado:Dibujo)=>{
-        this.actualizarDescripcionDeFeature(features, dibujoActualizado)
+        dibujosActualizados.forEach((dibujoActualizado: Dibujo) => {
+          this.actualizarDescripcionDeFeature(features, dibujoActualizado)
 
-      })
-    });
+        })
+      });
   }
 
   private actualizarDescripcionDeFeature = (features: Feature[], dibujoActualizado: Dibujo): void => {
-    features.forEach((feature: Feature)=>{
+    features.forEach((feature: Feature) => {
       let featureId = feature.getProperties()["id"];
-      if(featureId === dibujoActualizado.id){
-         feature.set("description", dibujoActualizado.description)
+      if (featureId === dibujoActualizado.id) {
+        feature.set("description", dibujoActualizado.description)
       }
     })
   }
 
 
-  //A: number[] | undefined
-  //B: number[]
-  //if(A !== undefined)
-  //A: number[]
 
   private addDibujo = (dibujo: Dibujo): void => {
 
     if (!dibujo.coordinates?.coordinatePoint) return;
-
-
 
     //contemplar el caso de marker.typeGeometry === LineString
     const startDibujo = new Feature({
@@ -222,8 +161,7 @@ export class MapComponent implements OnInit, OnChanges {
       description: dibujo.description
     });
 
-    //https://openlayers.org/en/latest/apidoc/module-ol_geom_LineString-LineString.html
-
+  
     startDibujo.setStyle(new Style({
       image: new Icon({
         anchor: [0.6, 0.5],
@@ -408,7 +346,7 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
 
-  upLoadGeoJSON(event: Event){
+  upLoadGeoJSON(event: Event) {
 
     let contingut = "";
 
@@ -424,24 +362,24 @@ export class MapComponent implements OnInit, OnChanges {
     }
 
 
-    if(event.target){
+    if (event.target) {
       let target = (event.target as HTMLInputElement)
-      if(target.files){
+      if (target.files) {
         fileReader.readAsText(target.files[0])// aqui es donde le dices: este es el archivo a leer.
       }
     }
 
   }
 
-  procesarFicheroJson (archivo: string){
+  procesarFicheroJson(archivo: string) {
     this.vectorSource.clear();
     console.log(this.vectorSource.features)
 
-    const featuresImportadas =  new GeoJSON().readFeatures(archivo)
+    const featuresImportadas = new GeoJSON().readFeatures(archivo)
     this.vectorSource.addFeatures(featuresImportadas);
 
-    let dibujos = featuresImportadas.map((feature)=>{
-    return this.transformarFeatureADibujo(feature)
+    let dibujos = featuresImportadas.map((feature) => {
+      return this.transformarFeatureADibujo(feature)
     })
 
     this.DibujosService.guardarDibujos(dibujos)
@@ -449,13 +387,13 @@ export class MapComponent implements OnInit, OnChanges {
 
   }
 
-  transformarFeatureADibujo(feature:Feature){
+  transformarFeatureADibujo(feature: Feature) {
 
 
     let geometry = feature.getGeometry();
 
     let coordinates: Coordinates = {};
-    let typeGeometry : "Point" | "LineString" | "Polygon" | "" = ""
+    let typeGeometry: "Point" | "LineString" | "Polygon" | "" = ""
     // typeGeometry se infiere que es de tipo string.
     // typeGeometry debe contener 1 de las 3 palabras siguientes: Point, LineString, Polygon
 
@@ -466,7 +404,7 @@ export class MapComponent implements OnInit, OnChanges {
 
     if (geometry instanceof LineString) {
       coordinates.coordinateLineString = geometry.getCoordinates()
-       typeGeometry = "LineString"
+      typeGeometry = "LineString"
     }
 
     if (geometry instanceof Polygon) {
@@ -474,7 +412,7 @@ export class MapComponent implements OnInit, OnChanges {
       typeGeometry = "Polygon"
     }
     //
-    const dibujo : Dibujo = {
+    const dibujo: Dibujo = {
       id: feature.getProperties()["id"],
       coordinates: coordinates,
       typeGeometry: typeGeometry,
