@@ -1,6 +1,6 @@
 
 <div class="container_btn_dibujo" >
-  <button class="p-1 btn rounded-3 sidenavBtn btn-light shadow-sm"
+  <button class="p-1  btn rounded-3 sidenavBtn btn-light shadow-sm"
    (click)="isSidebarVisible = !isSidebarVisible"
   ><svg width="26" height="27" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"
     class="icon-xl-heavy text-light">
@@ -29,22 +29,22 @@
 
 
     >
-    <p class="text-dark mt-6 fs-5 fw-bold">Aqui tens els llocs guardats</p>
+    <p class="text-dark mt-6 fs-4 fw-bold">Aqui tens els llocs guardats</p>
 
     <div class="form-floating text-dark" >
       <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let dibujo of filterDibujos()">
         <div class="" *ngIf="dibujo.isEditMode">
 
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username with two button addons"
+            <input type="text" class="form-control" placeholder="" aria-label=""
             [(ngModel)]="dibujo.description">
             <button class="btn btn-outline-success" type="button" (click)="saveToLocal(dibujo)">Guardar</button>
             <button class="btn btn-outline-danger" type="button" (click)="cancelEdit(dibujo)">Cancelar</button>
           </div>
         </div>
         <div *ngIf="!dibujo.isEditMode">
-          <div class="d-flex justify-content-between  ">
-            <span class="list-item text-dark bg-light p-1 rounded-pill fs-3">{{dibujo.description}} </span>
+          <div class="d-flex justify-content-between ">
+            <span class="list-item text-dark bg-light p-1 rounded-pill fs-6 text-break">{{dibujo.description}} </span>
 
            <div class="d-flex gap-1">
             <button (click)="editDescription(dibujo)" class="btn btn-outline-success "><i class="fa-regular fa-pen-to-square"></i></button>

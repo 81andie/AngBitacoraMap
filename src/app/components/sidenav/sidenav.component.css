@@ -17,6 +17,7 @@
   top: 10px;
   left: -560px;
   overflow-x: hidden;
+  scroll-behavior: hidden;
   height: 100vh;
   z-index: 500;
   transition: left 0.7s ease;
@@ -24,6 +25,11 @@
 
 .marcador{
   background-color: rgb(248, 246, 243);
+}
+
+.btn-outline-success,
+.btn-outline-danger{
+  height: 40px;
 }
 
 
