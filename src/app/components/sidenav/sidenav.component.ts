@@ -19,29 +19,29 @@ export class SidenavComponent implements OnInit {
   public editMode: boolean = false;
   public textToFilter: string = '';
 
-  public marcadores: Dibujo[] = [];
+  public dibujos: Dibujo[] = [];
 
-  private markersSubscription!: Subscription;
+  private dibujosSubscription!: Subscription;
   @Output() public centerMapToCoordinateEmitter = new EventEmitter<Dibujo>();
-  @Output() public removeMapMarker = new EventEmitter<Dibujo>();
+  @Output() public removeMapDibujo = new EventEmitter<Dibujo>();
 
-  constructor(private MarkersService: DibujosService) { }
+  constructor(private DibujosService: DibujosService) { }
 
   ngOnInit(): void {
 
-    this.markersSubscription = this.MarkersService
+    this.dibujosSubscription = this.DibujosService
     .obtenerSubscripcionDibujos()
     .subscribe((dibujosActualizados) => {
       //solo se ejecuta cuando algo /alguien guarda algo en el localstorage
-      this.marcadores = dibujosActualizados;
+      this.dibujos = dibujosActualizados;
     });
 
-    this.getMarkers();
+    this.getDibujos();
   }
 
 
-  getMarkers() {
-    this.marcadores = this.MarkersService.obtenerDibujos();
+  getDibujos() {
+    this.dibujos = this.DibujosService.obtenerDibujos();
     this.isSidebarVisible = true
   }
 
@@ -55,55 +55,54 @@ export class SidenavComponent implements OnInit {
   }
 
 
-  deleteMarker(markerToRemove: Dibujo) {
+  deleteDibujo(dibujoToRemove: Dibujo) {
     console.log("delete")
-    let storageMarkers = this.MarkersService.obtenerDibujos();
+    let storageDibujos = this.DibujosService.obtenerDibujos();
     //fem veure que storageMarkers té 5 markers
-    let indexMarkerDelete = -1;
-    storageMarkers.forEach((marker, index) => {
+    let indexDibujoDelete = -1;
+    storageDibujos.forEach((dibujo, index) => {
 
-      if (marker.id === markerToRemove.id) {
-        indexMarkerDelete = index;
+      if (dibujo.id === dibujoToRemove.id) {
+        indexDibujoDelete = index;
 
       }
     })
 
 
-    storageMarkers.splice(indexMarkerDelete, 1)
-    this.MarkersService.guardarDibujos(storageMarkers)
-    this.removeMapMarker.emit(markerToRemove)
+    storageDibujos.splice(indexDibujoDelete, 1)
+    this.DibujosService.guardarDibujos(storageDibujos)
+    this.removeMapDibujo.emit(dibujoToRemove)
 
   }
 
-  editDescription(markerToEdit: Dibujo) {
+  editDescription(dibujoToEdit: Dibujo) {
     console.log("editando")
-    markerToEdit.isEditMode = true;
-    markerToEdit.oldDescription = markerToEdit.description;
-
-
-  }
-
-  cancelEdit(markerToCancel: Dibujo) {
-    markerToCancel.isEditMode = false;
-    markerToCancel.description = markerToCancel.oldDescription;
-  }
-
-
-  saveToLocal(markerToSave: Dibujo) {
-
-    markerToSave.isEditMode = false;
-
-    this.MarkersService.guardarDibujos(this.marcadores)
+    dibujoToEdit.isEditMode = true;
+    dibujoToEdit.oldDescription = dibujoToEdit.description;
 
   }
 
+  cancelEdit(dibujoToCancel: Dibujo) {
+    dibujoToCancel.isEditMode = false;
+    dibujoToCancel.description = dibujoToCancel.oldDescription;
+  }
 
-  filterMarkers() {
+
+  saveToLocal(dibujoToSave: Dibujo) {
+
+    dibujoToSave.isEditMode = false;
+
+    this.DibujosService.guardarDibujos(this.dibujos)
+
+  }
+
+
+  filterDibujos() {
 
     if (this.textToFilter.length > 0) {
-      return this.marcadores.filter(marcador => marcador.description?.includes(this.textToFilter))
+      return this.dibujos.filter(dibujo => dibujo.description?.includes(this.textToFilter))
     }
-    return this.marcadores;
+    return this.dibujos;
   }
 
 

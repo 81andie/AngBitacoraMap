@@ -3,16 +3,16 @@
 <app-header></app-header>
 
 
-<app-map [temporaryMarkerToRemove]="temporaryMarkerToRemove"
+<app-map [temporaryDibujoToRemove]="temporaryDibujoToRemove"
          [dibujoACentrar] = "dibujoACentrar"
-        
+
 
 ></app-map>
 
 <router-outlet>
   <app-sidenav
   (centerMapToCoordinateEmitter)="changeCenterOfMapHandler($event)"
-  (removeMapMarker)="closeHandler($event)"
+  (removeMapDibujo)="closeHandler($event)"
 
 
   ></app-sidenav>

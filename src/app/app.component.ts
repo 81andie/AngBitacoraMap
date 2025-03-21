@@ -9,13 +9,13 @@ import { Dibujo } from './interfaces/dibujo.interface';
 export class AppComponent {
   title = 'AngBitacoraMap';
 
-  public temporaryMarkerToRemove:Dibujo = {id:0};
+  public temporaryDibujoToRemove:Dibujo = {id:0};
   public dibujoACentrar: Dibujo = {id:0};
-  
+
 
 
   closeHandler(marcador: Dibujo){
-    this.temporaryMarkerToRemove = marcador;
+    this.temporaryDibujoToRemove = marcador;
   }
 
   changeCenterOfMapHandler(dibujo: Dibujo){
