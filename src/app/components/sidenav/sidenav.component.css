@@ -14,10 +14,10 @@
 
 .parrafo{
   position: absolute;
+  overflow: auto;
+  scrollbar-width: none;
   top: 10px;
   left: -560px;
-  overflow-x: hidden;
-  scroll-behavior: hidden;
   height: 100vh;
   z-index: 500;
   transition: left 0.7s ease;
