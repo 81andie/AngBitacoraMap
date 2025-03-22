@@ -15,21 +15,20 @@
 <div class="container parrafo  bg-white bg-gradient text-light" [ngClass]="{'sidebar-visible': isSidebarVisible}">
   <div class="d-flex justify-content-end mb-3">
 
-    <button type="button" class="btn btn-danger btn-outline-danger text-light mt-3 p-2 h-25 flex-shrink-1"
+    <button type="button" class="btn btn-danger p-2 text-light mt-3 p-1 "
       (click)="isSidebarVisible = !isSidebarVisible">X</button>
-
   </div>
 
   <div class="offcanvas-body text-light mt-2 p-1">
 
     <div class="input-group input-group-lg">
       <span class="input-group-text bg-light text-danger" id="inputGroup-sizing-lg"><i class="fa-solid fa-magnifying-glass-location"></i></span>
-      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"   [(ngModel)]="textToFilter">
+      <input type="text" placeholder="Research..." class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"   [(ngModel)]="textToFilter">
     </div>
 
 
-    >
-    <p class="text-dark mt-6 fs-4 fw-bold">Here are the saved places</p>
+
+    <p class="text-dark mt-10 p-2 fs-5 fw-bold">Here are the saved places</p>
 
     <div class="form-floating text-dark" >
       <div class="list-item-group justify-content-evenly mt-2 ms-2 h-25 p-2 rounded-sm marcador" *ngFor="let dibujo of filterDibujos()">
@@ -43,8 +42,8 @@
           </div>
         </div>
         <div *ngIf="!dibujo.isEditMode">
-          <div class="d-flex justify-content-between ">
-            <span class="list-item text-dark bg-light p-1 rounded-pill fs-6 text-break">{{dibujo.description}} </span>
+          <div class="d-flex justify-content-between">
+            <span class="list-item text-dark bg-light  rounded-pill fs-6 text-break">{{dibujo.description}} </span>
 
            <div class="d-flex gap-1">
             <button (click)="editDescription(dibujo)" class="btn btn-outline-success "><i class="fa-regular fa-pen-to-square"></i></button>
@@ -56,16 +55,10 @@
         </div>
 
         <hr class="text-dark">
-        <button class="btn btn-outline-primary p-2  mt-4  p-2" (click)="centerMapToCoordinate(dibujo)"><i class="fa-solid fa-map-location-dot"></i></button>
+        <button class="btn btn-outline-primary p-2" (click)="centerMapToCoordinate(dibujo)"><i class="fa-solid fa-map-location-dot"></i></button>
 
       </div>
-      <!-- <textarea class="form-control text-dark h-25 " placeholder="Escriu..." id="floatingTextarea"></textarea>
-      <label for="floatingTextarea">Vull anar a...</label>-->
+
     </div>
   </div>
-
-
-
-
-
 </div>
