@@ -1,5 +1,5 @@
 Bitacora Map
-Una aplicación web construida con Angular 17 que integra OpenLayers. És la compañera perfecta para los amantes de grandes viajes, circuitos y pequeñas aventuras que quieras tener a mano, ya sea para recordarlos o para prepararlos. Permite trazar circuitos, guardarlos, editarlos, arrastrarlos. Es posible poder obtener la geolocalización de todos los viajes.Lo cual es muy útil para poder enviar a compañeros, família etc etc  en caso de emergencia para facilitar información a autoridades gubernamentales
+Es una aplicación web construida con Angular 17 que integra OpenLayers. És la compañera perfecta para los amantes de grandes viajes, circuitos y pequeñas aventuras que siempre podéis tener a mano, ya sea para recordarlos o para prepararlos. Permite trazar circuitos, guardarlos, editarlos, arrastrarlos. Es posible poder obtener la geolocalización de todos los viajes.Lo cual es muy útil para poder enviar a compañeros, família etc etc   o en caso de emergencia para facilitar información a autoridades gubernamentales
 
 🚀 Características
 Framework Angular 17
