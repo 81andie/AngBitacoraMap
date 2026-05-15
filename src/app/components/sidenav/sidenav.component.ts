@@ -32,6 +32,7 @@ export class SidenavComponent implements OnInit {
       this.dibujos = dibujosActualizados;
     });
     this.getDibujos();
+    this.isSidebarVisible = false
   }
 
 
