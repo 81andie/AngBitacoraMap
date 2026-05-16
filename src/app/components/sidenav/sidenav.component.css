@@ -18,10 +18,16 @@
   overflow: auto;
   scrollbar-width: none;
   top: 10px;
-  left: -560px;
+  /*left: -560px;*/
+  left: 0;
+  transform: translateX(-100%);
   height: 100vh;
   z-index: 500;
-  transition: left 0.7s ease;
+  transition: left 1.7s ease;
+}
+
+.sidebar-visible{
+  transform: translateX(0);
 }
 
 .marcador{
